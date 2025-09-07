@@ -99,9 +99,15 @@
   <section id="projects" class="py-5">
     <div class="container">
       <h3 class="mb-4 text-center"><i class="fas fa-code me-2 text-accent"></i>Projects</h3>
+      <!-- Project Filter Buttons -->
+      <div class="project-filter-btns d-flex justify-content-center mb-4 flex-wrap gap-3">
+        <button class="project-filter-btn active" data-filter="all">All</button>
+        <button class="project-filter-btn" data-filter="fullstacked">Full-Stacked</button>
+        <button class="project-filter-btn" data-filter="frontend">Frontend</button>
+      </div>
       <div class="row g-4 projects-row justify-content-center">
         <!-- Project Card Example -->
-        <div class="col-md-4" data-aos="flip-left" data-aos-duration="2000">
+        <div class="col-md-4 project-item" data-type="frontend" data-aos="flip-left" data-aos-duration="2000">
           <div class="card project-card h-100 shadow-sm">
             <img src="project1.jpg" class="card-img-top" alt="Project 1">
             <div class="card-body">
@@ -109,22 +115,20 @@
               <p class="card-text">A Clone page of Bata.Com fully reponsable<a
                   href="https://bata-clone-page.vercel.app/" target="_blank" class="text-accent">Live
                   Demo</a></p>
-
             </div>
           </div>
         </div>
-        <div class="col-md-4" data-aos="flip-left" data-aos-duration="2000">
+        <div class="col-md-4 project-item" data-type="fullstacked" data-aos="flip-left" data-aos-duration="2000">
           <div class="card project-card h-100 shadow-sm">
             <img src="project2.jpg" class="card-img-top" alt="Project 2">
             <div class="card-body">
               <h5 class="card-title">Student Guidance Portal</h5>
               <p class="card-text">Django-based platform to connect students and teachers. <a
                   href="https://jawad.pythonanywhere.com/" target="_blank" class="text-accent">Live Demo</a></p>
-
             </div>
           </div>
         </div>
-        <div class="col-md-4 " data-aos="flip-left" data-aos-duration="2000">
+        <div class="col-md-4 project-item" data-type="frontend" data-aos="flip-left" data-aos-duration="2000">
           <div class="card project-card h-100 shadow-sm">
             <img src="project3.jpg" class="card-img-top" alt="Project 3">
             <div class="card-body">
@@ -132,7 +136,6 @@
               <p class="card-text">A CV maker website using React.js and Tailwind CSS.<a
                   href="https://cv-maker-sigma-smoky.vercel.app/" target="_blank" class="text-accent">Live Demo</a>
               </p>
-
             </div>
           </div>
         </div>
