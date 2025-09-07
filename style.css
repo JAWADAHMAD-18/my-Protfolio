@@ -1,3 +1,119 @@
+.light-mode .testimonials-section .testimonial {
+  background: #fafdff !important;
+  color: #2d3a4a !important;
+  border-left: 4px solid #4b6cb7 !important;
+  box-shadow: 0 2px 12px #e3eaf5;
+}
+.light-mode .github-icon {
+  color: #24292f !important;
+  background: #e3eaf5 !important;
+}
+.light-mode .github-icon:hover {
+  color: #fff !important;
+  background: #24292f !important;
+}
+.light-mode .linkedin-icon {
+  color: #0077b5 !important;
+  background: #e3eaf5 !important;
+}
+.light-mode .linkedin-icon:hover {
+  color: #fff !important;
+  background: #0077b5 !important;
+}
+.light-mode #about {
+  background: #fafdff !important;
+  color: #2d3a4a !important;
+  box-shadow: 0 2px 12px #e3eaf5;
+}
+.light-mode .timeline-dot {
+  background: #4b6cb7 !important;
+}
+/* Terminal message color in light mode */
+.light-mode .terminal-message, .light-mode .terminal-output, .light-mode .terminal, .light-mode .console, .light-mode pre, .light-mode code {
+  background: #fafdff !important;
+  color: #4b6cb7 !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #e3eaf5;
+}
+/* Project Filter Buttons */
+
+.project-filter-btns {
+  gap: 1.2rem;
+}
+.project-filter-btn {
+  padding: 0.6rem 1.7rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #fff;
+  color: var(--color-accent);
+  border: none;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px #0002;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.project-filter-btn.active {
+  background: linear-gradient(90deg, var(--color-accent) 0%, #f7c873 100%);
+  color: #1e293b;
+  box-shadow: 0 4px 18px #c59d5f55;
+}
+.project-filter-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 18px #c59d5f55;
+}
+@media (max-width: 576px) {
+  .project-filter-btn {
+    font-size: 0.98rem;
+    padding: 0.5rem 1.1rem;
+  }
+}
+/* Navbar toggler button and icon visibility */
+.navbar-toggler {
+  border: 2px solid var(--color-accent) !important;
+  background: rgba(76,108,183,0.08) !important;
+  border-radius: 8px;
+  transition: border 0.2s, background 0.2s;
+}
+.navbar-toggler:focus, .navbar-toggler:hover {
+  border: 2.5px solid #f7c873 !important;
+  background: #f7c87322 !important;
+}
+.navbar-toggler-icon {
+  background-image: none !important;
+  width: 1.8em;
+  height: 1.8em;
+  position: relative;
+  display: inline-block;
+}
+.navbar-toggler-icon::before, .navbar-toggler-icon::after, .navbar-toggler-icon span {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  margin: 5px 0;
+}
+.navbar-toggler-icon::before {
+  margin-top: 0.3em;
+}
+.navbar-toggler-icon::after {
+  margin-bottom: 0.3em;
+}
+.light-mode .navbar-toggler {
+  border: 2px solid #4b6cb7 !important;
+  background: #fff !important;
+}
+.light-mode .navbar-toggler:focus, .light-mode .navbar-toggler:hover {
+  border: 2.5px solid #f7c873 !important;
+  background: #f7c87322 !important;
+}
+.light-mode .navbar-toggler-icon::before, .light-mode .navbar-toggler-icon::after, .light-mode .navbar-toggler-icon span {
+  background: #4b6cb7;
+}
 /*
   SnapFolio-inspired color palette and layout (closer to the demo)
   - Deep blue, purple, and accent gradients
@@ -22,13 +138,14 @@
   --text-main: var(--color-text-primary);
   --text-muted: var(--color-text-muted);
 }
-body,html {
+body,
+html {
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -51,7 +168,8 @@ body {
   transition: color 0.2s;
   position: relative;
 }
-.navbar .nav-link.active, .navbar .nav-link:focus {
+.navbar .nav-link.active,
+.navbar .nav-link:focus {
   color: var(--color-accent) !important;
   border-bottom: 2.5px solid var(--color-accent);
 }
@@ -66,7 +184,12 @@ section {
   box-shadow: 0 6px 24px #0002;
 }
 .hero-section {
-  background: linear-gradient(120deg, var(--color-section) 60%, var(--color-bg) 100%), url('profile.jpg') center/cover no-repeat;
+  background: linear-gradient(
+      120deg,
+      var(--color-section) 60%,
+      var(--color-bg) 100%
+    ),
+    url("profile.jpg") center/cover no-repeat;
   border-radius: 2.5rem;
   min-height: 80vh;
   max-width: 97vw;
@@ -78,7 +201,7 @@ section {
   overflow: hidden;
 }
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgba(15, 23, 42, 0.7);
@@ -98,7 +221,7 @@ section {
   height: 220px;
   object-fit: cover;
   border: 6px solid var(--color-accent);
-  box-shadow: 0 12px 48px var(--color-accent)33;
+  box-shadow: 0 12px 48px var(--color-accent) 33;
   margin-bottom: 0;
 }
 .hero-text {
@@ -174,19 +297,23 @@ section {
   overflow: hidden;
   height: 28px;
   margin-bottom: 0;
-  box-shadow: 0 2px 8px var(--color-accent)22;
+  box-shadow: 0 2px 8px var(--color-accent) 22;
 }
 .skills-bar .bar-inner {
-  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-text-secondary) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-text-secondary) 100%
+  );
   color: var(--color-bg);
   font-weight: 600;
   text-align: right;
   padding-right: 12px;
   line-height: 28px;
   border-radius: 10px 0 0 10px;
-  transition: width 1.2s cubic-bezier(.77,0,.18,1);
+  transition: width 1.2s cubic-bezier(0.77, 0, 0.18, 1);
 }
-#about{
+#about {
   font-size: larger;
 }
 
@@ -211,7 +338,8 @@ section {
   width: 100%;
   min-height: 340px;
 }
-.skills-bars-col, .skills-title-col {
+.skills-bars-col,
+.skills-title-col {
   flex: 1 1 50%;
   display: flex;
   flex-direction: column;
@@ -250,11 +378,15 @@ section {
   border-radius: 10px;
   height: 28px;
   overflow: hidden;
-  box-shadow: 0 2px 8px var(--color-accent)22;
+  box-shadow: 0 2px 8px var(--color-accent) 22;
   position: relative;
 }
 .skill-bar-fill {
-  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-text-secondary) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-text-secondary) 100%
+  );
   color: var(--color-bg);
   font-weight: 600;
   text-align: right;
@@ -263,19 +395,38 @@ section {
   border-radius: 10px 0 0 10px;
   width: 0;
   opacity: 0.9;
-  transition: width 1.2s cubic-bezier(.77,0,.18,1);
+  transition: width 1.2s cubic-bezier(0.77, 0, 0.18, 1);
 }
 
 /* Remove clients section visually */
-.clients-section { display: none !important; }
+.clients-section {
+  display: none !important;
+}
 
 /* Animate all sections on load */
-section, .hero-section .container, .about-section .row, .projects-row, .skills-bar, .resume-section .container, .services-section .container, .testimonials-section .container, .contact-section .container {
+section,
+.hero-section .container,
+.about-section .row,
+.projects-row,
+.skills-bar,
+.resume-section .container,
+.services-section .container,
+.testimonials-section .container,
+.contact-section .container {
   opacity: 0;
   transform: translateX(80px);
-  transition: opacity 1s cubic-bezier(.77,0,.18,1), transform 1s cubic-bezier(.77,0,.18,1);
+  transition: opacity 1s cubic-bezier(0.77, 0, 0.18, 1),
+    transform 1s cubic-bezier(0.77, 0, 0.18, 1);
 }
-section.visible, .hero-section .container.visible, .about-section .row.visible, .projects-row.visible, .skills-bar.visible, .resume-section .container.visible, .services-section .container.visible, .testimonials-section .container.visible, .contact-section .container.visible {
+section.visible,
+.hero-section .container.visible,
+.about-section .row.visible,
+.projects-row.visible,
+.skills-bar.visible,
+.resume-section .container.visible,
+.services-section .container.visible,
+.testimonials-section .container.visible,
+.contact-section .container.visible {
   opacity: 1;
   transform: none;
 }
@@ -303,7 +454,7 @@ footer .text-accent {
 }
 .services-section .service-card:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 8px 32px var(--color-accent)33;
+  box-shadow: 0 8px 32px var(--color-accent) 33;
 }
 .services-section .service-icon {
   font-size: 2.5rem;
@@ -330,19 +481,27 @@ footer .text-accent {
 }
 
 .resume-section .resume-btn {
-  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-text-secondary) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-text-secondary) 100%
+  );
   color: var(--color-bg);
   font-weight: 600;
   border: none;
   border-radius: 2rem;
   padding: 0.8rem 2.2rem;
   font-size: 1.2rem;
-  box-shadow: 0 4px 24px var(--color-accent)22;
+  box-shadow: 0 4px 24px var(--color-accent) 22;
   transition: background 0.2s, box-shadow 0.2s;
 }
 .resume-section .resume-btn:hover {
-  background: linear-gradient(90deg, var(--color-text-secondary) 0%, var(--color-accent) 100%);
-  box-shadow: 0 8px 32px var(--color-accent)33;
+  background: linear-gradient(
+    90deg,
+    var(--color-text-secondary) 0%,
+    var(--color-accent) 100%
+  );
+  box-shadow: 0 8px 32px var(--color-accent) 33;
 }
 
 /* Section sizing and responsiveness */
@@ -355,7 +514,17 @@ footer .text-accent {
     flex-direction: column;
     min-height: 0;
   }
-  .skills-bars-col, .skills-title-col {
+  .skills-title-col {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    order: -1;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
+  }
+  .skills-bars-col {
     width: 100%;
     min-width: 0;
     padding: 0;
@@ -390,23 +559,23 @@ footer .text-accent {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(30,41,59,0.7);
+  background: rgba(30, 41, 59, 0.7);
   color: #fff;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
   box-shadow: 0 2px 12px #0002;
   font-size: 1.7rem;
-   background: transparent;
+  background: transparent;
   box-shadow: none;
   margin-right: 0;
 }
 .hero-btns .btn-icon.github-icon:hover {
-  background: linear-gradient(90deg,#333 0%,#6e5494 100%);
+  background: linear-gradient(90deg, #333 0%, #6e5494 100%);
   color: #fff;
   transform: scale(1.13) rotate(-8deg);
   box-shadow: 0 4px 18px #6e5494aa;
 }
 .hero-btns .btn-icon.linkedin-icon:hover {
-  background: linear-gradient(90deg,#0077b5 0%,#00c6fb 100%);
+  background: linear-gradient(90deg, #0077b5 0%, #00c6fb 100%);
   color: #fff;
   transform: scale(1.13) rotate(8deg);
   box-shadow: 0 4px 18px #0077b5aa;
@@ -427,25 +596,28 @@ footer .text-accent {
     margin-left: 6px;
   }
 }
-      /* for light mode */
+/* for light mode */
+/* Theme toggle button base */
 .btn-toggle-mode {
   color: #f7c873;
   background: transparent;
   border: none;
   outline: none;
   box-shadow: none;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
 .btn-toggle-mode:hover {
   color: #fff;
+  background: rgba(30,41,59,0.12);
 }
+/* Softer, modern light mode palette for better readability and comfort */
 .light-mode {
-  --color-bg: #f7f7fa;
-  --color-section: #fff;
-  --color-accent: #1e293b;
-  --color-text-primary: #23272f;
-  --color-text-secondary: #4b5563;
-  --color-text-muted: #6b7280;
+  --color-bg: #f7f8fa;
+  --color-section: #fafdff;
+  --color-accent: #4b6cb7;
+  --color-text-primary: #2d3a4a;
+  --color-text-secondary: #6b7a90;
+  --color-text-muted: #a0aec0;
 }
 .light-mode .navbar {
   background: var(--color-section) !important;
@@ -455,64 +627,44 @@ footer .text-accent {
 .light-mode .navbar .nav-link {
   color: var(--color-text-primary) !important;
 }
-.light-mode .navbar .nav-link.active, .light-mode .navbar .nav-link:focus {
+.light-mode .navbar .nav-link.active,
+.light-mode .navbar .nav-link:focus {
   color: var(--color-accent) !important;
   border-bottom: 2.5px solid var(--color-accent);
 }
 .light-mode .hero-section {
-  background: linear-gradient(120deg, var(--color-section) 60%, var(--color-bg) 100%), url('profile.jpg') center/cover no-repeat;
+  background: linear-gradient(120deg, #fafdff 60%, #f7f8fa 100%), url('profile.jpg') center/cover no-repeat;
 }
 .light-mode .hero-text {
-  background: rgba(255,255,255,0.7);
-  color: var(--color-text-primary);
+  background: rgba(255,255,255,0.92);
+  color: #2d3a4a;
+  text-shadow: 0 2px 12px #e3eaf5;
 }
 .light-mode .btn-cv {
-  background: linear-gradient(90deg, #1e293b 0%, #4b5563 100%);
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
   color: #fff;
+  border: none;
 }
 .light-mode .btn-cv:hover {
-  background: linear-gradient(90deg, #4b5563 0%, #1e293b 100%);
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
   color: #f7c873;
 }
-.light-mode .btn-icon {
-  background: rgba(255,255,255,0.7);
-  color: #23272f;
-}
-.light-mode .btn-icon.github-icon:hover {
-  background: linear-gradient(90deg,#6e5494 0%,#333 100%);
-  color: #fff;
-}
-.light-mode .btn-icon.linkedin-icon:hover {
-  background: linear-gradient(90deg,#00c6fb 0%,#0077b5 100%);
-  color: #fff;
-}
-.light-mode .testimonials-section .testimonial {
-  background: #fff;
-  color: #23272f;
-  border-left: 4px solid var(--color-accent);
-}
-.light-mode .contact-section,
-.light-mode .contact-section .container,
-.light-mode .contact-section input,
-.light-mode .contact-section textarea {
-  background: #fff !important;
-  color: #23272f !important;
-}
-/* Light mode fixes for Services and Contact button */
 .light-mode .services-section .service-card {
-  background: #fff;
-  color: #23272f;
-  border: 1.5px solid var(--color-accent);
+  background: #fafdff;
+  color: #2d3a4a;
+  border: 1.5px solid #4b6cb7;
+  box-shadow: 0 4px 24px #e3eaf5;
 }
 .light-mode .services-section .service-icon {
-  color: var(--color-accent);
+  color: #4b6cb7;
 }
 .light-mode .btn.btn-accent {
-  background: linear-gradient(90deg, #1e293b 0%, #4b5563 100%) !important;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%) !important;
   color: #fff !important;
-  border: 1px solid var(--color-accent) !important;
+  border: none !important;
+  box-shadow: 0 2px 12px #e3eaf5;
 }
 .light-mode .btn.btn-accent:hover {
-  background: linear-gradient(90deg, #4b5563 0%, #1e293b 100%) !important;
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%) !important;
   color: #f7c873 !important;
 }
