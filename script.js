@@ -1,3 +1,20 @@
+// --- Project Filter Buttons ---
+const filterBtns = document.querySelectorAll('.project-filter-btn');
+const projectItems = document.querySelectorAll('.project-item');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.getAttribute('data-filter');
+    projectItems.forEach(item => {
+      if (filter === 'all' || item.getAttribute('data-type') === filter) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
 // Smooth scroll for nav links
 const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
@@ -163,3 +180,4 @@ themeToggleBtn.addEventListener('click', function() {
     icon.classList.add('fa-moon');
   }
 });
+
