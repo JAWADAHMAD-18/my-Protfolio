@@ -18,6 +18,7 @@ button.addEventListener("click", function (event) {
   form.reset(); // Reset the form fields
 });
 
+// ...existing code...
 // Smooth scroll for nav links
 const navLinks = document.querySelectorAll(".nav-link");
 navLinks.forEach((link) => {

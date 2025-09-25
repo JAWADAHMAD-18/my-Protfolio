@@ -1,12 +1,12 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body{
-  font-family: 'Poppins', sans-serif;
-  
+body {
+  font-family: "Poppins", sans-serif;
 }
+
 .light-mode .testimonials-section .testimonial {
   background: #fafdff !important;
   color: #2d3a4a !important;
@@ -38,7 +38,12 @@ body{
   background: #4b6cb7 !important;
 }
 /* Terminal message color in light mode */
-.light-mode .terminal-message, .light-mode .terminal-output, .light-mode .terminal, .light-mode .console, .light-mode pre, .light-mode code {
+.light-mode .terminal-message,
+.light-mode .terminal-output,
+.light-mode .terminal,
+.light-mode .console,
+.light-mode pre,
+.light-mode code {
   background: #fafdff !important;
   color: #4b6cb7 !important;
   border-radius: 8px;
@@ -82,11 +87,12 @@ body{
 /* Navbar toggler button and icon visibility */
 .navbar-toggler {
   border: 2px solid var(--color-accent) !important;
-  background: rgba(76,108,183,0.08) !important;
+  background: rgba(76, 108, 183, 0.08) !important;
   border-radius: 8px;
   transition: border 0.2s, background 0.2s;
 }
-.navbar-toggler:focus, .navbar-toggler:hover {
+.navbar-toggler:focus,
+.navbar-toggler:hover {
   border: 2.5px solid #f7c873 !important;
   background: #f7c87322 !important;
 }
@@ -97,8 +103,10 @@ body{
   position: relative;
   display: inline-block;
 }
-.navbar-toggler-icon::before, .navbar-toggler-icon::after, .navbar-toggler-icon span {
-  content: '';
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon span {
+  content: "";
   display: block;
   height: 3px;
   width: 100%;
@@ -116,11 +124,14 @@ body{
   border: 2px solid #4b6cb7 !important;
   background: #fff !important;
 }
-.light-mode .navbar-toggler:focus, .light-mode .navbar-toggler:hover {
+.light-mode .navbar-toggler:focus,
+.light-mode .navbar-toggler:hover {
   border: 2.5px solid #f7c873 !important;
   background: #f7c87322 !important;
 }
-.light-mode .navbar-toggler-icon::before, .light-mode .navbar-toggler-icon::after, .light-mode .navbar-toggler-icon span {
+.light-mode .navbar-toggler-icon::before,
+.light-mode .navbar-toggler-icon::after,
+.light-mode .navbar-toggler-icon span {
   background: #4b6cb7;
 }
 /*
@@ -414,7 +425,6 @@ section {
 
 /* Animate all sections on load */
 
-
 footer {
   background: var(--color-section);
   color: var(--color-text-muted);
@@ -592,13 +602,14 @@ footer .text-accent {
 }
 .btn-toggle-mode:hover {
   color: #fff;
-  background: rgba(30,41,59,0.12);
+  background: rgba(30, 41, 59, 0.12);
 }
 
 /* Make sun icon visible in light mode */
 .light-mode .btn-toggle-mode .fa-sun {
   color: #eecf1d !important; /* Accent color for visibility */
 }
+
 /* Softer, modern light mode palette for better readability and comfort */
 .light-mode {
   --color-bg: #f7f8fa;
@@ -622,10 +633,11 @@ footer .text-accent {
   border-bottom: 2.5px solid var(--color-accent);
 }
 .light-mode .hero-section {
-  background: linear-gradient(120deg, #fafdff 60%, #f7f8fa 100%), url('profile.jpg') center/cover no-repeat;
+  background: linear-gradient(120deg, #fafdff 60%, #f7f8fa 100%),
+    url("profile.jpg") center/cover no-repeat;
 }
 .light-mode .hero-text {
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   color: #2d3a4a;
   text-shadow: 0 2px 12px #e3eaf5;
 }
