@@ -1,32 +1,56 @@
+// --- GSAP TextPlugin for Typing Effect ---
+// Load TextPlugin if not already loaded
+if (!gsap.plugins.TextPlugin) {
+  gsap.registerPlugin(window.TextPlugin);
+}
+
+const button = document.querySelector(".send-button");
+const form = document.querySelector("#contactForm");
+button.addEventListener("click", function (event) {
+  event.preventDefault(); // Prevent form submission
+  Swal.fire({
+    icon: "success",
+    title: '<span style="color:green">Message Sent!</span>',
+    html: '<span style="color:#28a745">Thank you for your message!</span>',
+    showConfirmButton: false,
+    timer: 1500,
+  });
+  form.reset(); // Reset the form fields
+});
+
 // Smooth scroll for nav links
-const navLinks = document.querySelectorAll('.nav-link');
-navLinks.forEach(link => {
-  link.addEventListener('click', function(e) {
+const navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach((link) => {
+  link.addEventListener("click", function (e) {
     if (this.hash) {
       e.preventDefault();
-      document.querySelector(this.hash).scrollIntoView({ behavior: 'smooth' });
-      document.querySelector('.navbar-collapse').classList.remove('show');
+      document.querySelector(this.hash).scrollIntoView({ behavior: "smooth" });
+      document.querySelector(".navbar-collapse").classList.remove("show");
     }
   });
 });
 
 // Active link switching
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const scrollPos = window.scrollY + 80;
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     const section = document.querySelector(link.hash);
-    if (section && section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+    if (
+      section &&
+      section.offsetTop <= scrollPos &&
+      section.offsetTop + section.offsetHeight > scrollPos
+    ) {
+      navLinks.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
     }
   });
 });
 
 // Animated hero name/subtitle: realistic right-to-left removal and typing
-const heroName = document.getElementById('hero-name');
-const heroSubtitle = document.getElementById('hero-subtitle');
-const nameText = 'Jawad Ahmad  ';
-const subtitleText = 'Frontend Developer & Learner';
+const heroName = document.getElementById("hero-name");
+const heroSubtitle = document.getElementById("hero-subtitle");
+const nameText = "Jawad Ahmad  ";
+const subtitleText = "Full-Stacked Developer & Learner";
 
 // --- HERO ANIMATION STATE ---
 let i = 0;
@@ -39,8 +63,8 @@ function animateHeroTitle() {
   heroAnimationRunning = true;
   i = 0;
   j = 0;
-  heroName.textContent = '';
-  heroSubtitle.textContent = '';
+  heroName.textContent = "";
+  heroSubtitle.textContent = "";
   heroSubtitle.style.opacity = 0;
   heroName.style.opacity = 1;
   typeHeroname();
@@ -94,72 +118,191 @@ function animateHeroTitle() {
 }
 setTimeout(animateHeroTitle, 1200);
 
-// --- Only animate home section on load, others on scroll ---
-window.addEventListener('DOMContentLoaded', () => {
-  // Only home section and hero container animate on load
-  document.querySelector('.hero-section .container').classList.add('visible');
-  document.querySelector('section#home').classList.add('visible');
-  revealOnScroll();
-});
-
-// Scroll animations
-function revealOnScroll() {
-  document.querySelectorAll('section:not(#home), .about-section .row, .projects-row, .skills-bar, .resume-section .container, .services-section .container, .testimonials-section .container, .contact-section .container')
-    .forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 80) {
-        el.classList.add('visible');
+// --- Project Filter Buttons (Restored) ---
+const filterBtns = document.querySelectorAll(".project-filter-btn");
+const projectItems = document.querySelectorAll(".project-item");
+filterBtns.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    filterBtns.forEach((b) => b.classList.remove("active"));
+    this.classList.add("active");
+    const filter = this.getAttribute("data-filter").trim().toLowerCase();
+    projectItems.forEach((item) => {
+      const type = item.getAttribute("data-type").trim().toLowerCase();
+      if (filter === "all" || type === filter) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
       }
     });
-}
-window.addEventListener('scroll', revealOnScroll);
-
-// Lightbox for project images
-const projectCards = document.querySelectorAll('.project-card img');
-const lightboxModal = document.getElementById('lightboxModal');
-const lightboxImg = document.getElementById('lightboxImg');
-projectCards.forEach(img => {
-  img.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    const modal = new bootstrap.Modal(lightboxModal);
-    modal.show();
   });
 });
 
-// Contact form stub (no reload)
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  this.reset();
-  alert('Thank you for your message!');
+// --- GSAP Typing Effect for Header Text (Looping) ---
+
+// --- Theme Toggle ---
+const themeToggleBtn = document.getElementById("theme-toggle");
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", function () {
+    document.body.classList.toggle("light-mode");
+    // Change icon
+    const icon = themeToggleBtn.querySelector("i");
+    if (document.body.classList.contains("light-mode")) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    } else {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    }
+  });
+}
+
+// =======================
+// GSAP + ScrollTrigger Setup
+// =======================
+gsap.registerPlugin(ScrollTrigger);
+
+// Navbar animation on load
+gsap.from("#navbar", {
+  y: -150,
+  opacity: 0,
+  duration: 1.6,
+  ease: "power3.out",
 });
 
-// Animate skill bars when skills section comes into view
-function animateSkillBars() {
-  const section = document.querySelector('.skills-section');
-  const bars = document.querySelectorAll('.skill-bar-fill');
-  if (!section || !bars.length) return;
-  const rect = section.getBoundingClientRect();
-  if (rect.top < window.innerHeight - 80) {
-    bars.forEach(bar => {
-      const width = bar.getAttribute('data-width');
-      bar.style.width = width + '%';
-    });
-    window.removeEventListener('scroll', animateSkillBars);
+// Hero Section animations
+gsap.from(".scroll-left", {
+  x: -100,
+  opacity: 0,
+  duration: 1.7,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".scroll-left",
+    start: "top 80%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+gsap.from(".scroll-right", {
+  x: 100,
+  opacity: 0,
+  duration: 1.7,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".scroll-right",
+    start: "top 80%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+// About section
+gsap.from("#about img", {
+  x: -100,
+  opacity: 0,
+  duration: 1.5,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#about",
+    start: "top 80%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+gsap.from("#about h3, #about p, #about ul", {
+  x: 100,
+  opacity: 0,
+  duration: 1.5,
+  stagger: 0.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#about",
+    start: "top 80%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+// Projects cards
+gsap.from(".project-card", {
+  y: 50,
+  opacity: 0,
+  rotationY: 180,
+  scale: 0.8,
+  duration: 1,
+  stagger: 0.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#projects",
+    start: "top 80%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+//Skills bar fill animation
+gsap.fromTo(
+  ".skill-bar-fill",
+  { width: "0%" },
+  {
+    width: (i, el) => el.dataset.width + "%",
+    duration: 1.5,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: "#skills",
+      start: "top 70%",
+      toggleActions: "restart reverse restart reverse",
+    },
   }
-}
-window.addEventListener('scroll', animateSkillBars);
-window.addEventListener('DOMContentLoaded', animateSkillBars);
-// --- Theme Toggle ---
-const themeToggleBtn = document.getElementById('theme-toggle');
-themeToggleBtn.addEventListener('click', function() {
-  document.body.classList.toggle('light-mode');
-  // Change icon
-  const icon = themeToggleBtn.querySelector('i');
-  if (document.body.classList.contains('light-mode')) {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  }
+);
+
+// // Services cards
+// gsap.from(".service-card", {
+//   y: 150,
+//   opacity: 0,
+//   duration: 1.7,
+//   // stagger: 0.3,
+//   ease: "power3.out",
+//   scrollTrigger: {
+//     trigger: "#services",
+//     start: "top 75%",
+//     markers: true,
+//     toggleActions: "restart reverse restart reverse"
+//   },
+// });
+gsap.from(".service-card", {
+  y: 100, // neeche se aaye
+  opacity: 0, // fade in
+  rotationY: 90, // spin (3D flip from side)
+  transformOrigin: "center center", // smooth flip
+  duration: 1.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".service-card",
+    start: "top 70%",
+    end: "bottom top",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+// Testimonials
+gsap.from(".testimonial", {
+  x: -80,
+  opacity: 0,
+  duration: 1.2,
+  stagger: 0.3,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#testimonials",
+    start: "top 85%",
+    toggleActions: "restart reverse restart reverse",
+  },
+});
+
+// Contact form
+gsap.from("#contact form", {
+  y: 100,
+  opacity: 0,
+  duration: 1.5,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: "#contact",
+    start: "top 85%",
+    toggleActions: "restart reverse restart reverse",
+  },
 });
