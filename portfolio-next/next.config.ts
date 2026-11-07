@@ -12,6 +12,20 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/skills",
+        destination: "/about#stack",
+        permanent: true,
+      },
+      {
+        source: "/certifications",
+        destination: "/about#certifications",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

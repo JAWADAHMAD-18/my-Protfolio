@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "speaker": "Ahmed (AI Receptionist)",
+    "time": 0,
+    "text": "Hello, thank you for calling Bahawal Healthcare Clinic. My name is Ahmed. How may I assist you today?"
+  },
+  {
+    "id": 2,
+    "speaker": "Caller (Jawad)",
+    "time": 4,
+    "text": "Hi Ahmed, I'd like to book an appointment with Dr. Malik for a routine checkup this Thursday."
+  },
+  {
+    "id": 3,
+    "speaker": "Ahmed (AI Receptionist)",
+    "time": 9,
+    "text": "I can certainly help you with that. Let me check Dr. Malik's calendar for Thursday. We have openings at 10:30 AM and 2:15 PM. Which time suits you better?"
+  },
+  {
+    "id": 4,
+    "speaker": "Caller (Jawad)",
+    "time": 16,
+    "text": "10:30 AM works great for me."
+  },
+  {
+    "id": 5,
+    "speaker": "Ahmed (AI Receptionist)",
+    "time": 19,
+    "text": "Perfect. I have reserved Thursday at 10:30 AM for your checkup with Dr. Malik. You will receive an SMS confirmation shortly. Have a great day!"
+  }
+]
