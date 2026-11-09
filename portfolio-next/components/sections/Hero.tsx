@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { DeviceFrame } from "@/components/media/DeviceFrame";
 import { VideoLoop } from "@/components/media/VideoLoop";
+import { useChat } from "@/components/chat/ChatProvider";
 
 function useIsMac() {
   return React.useSyncExternalStore(
@@ -17,6 +18,7 @@ function useIsMac() {
 
 export function Hero() {
   const isMac = useIsMac();
+  const { openChat } = useChat();
 
   return (
     <section className="relative w-full overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20">
@@ -81,6 +83,7 @@ export function Hero() {
               {/* Ask AI Input-style Button */}
               <button
                 type="button"
+                onClick={openChat}
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border bg-surface-2/60 text-muted hover:text-text hover:border-accent text-sm font-mono transition-colors cursor-pointer"
                 aria-label="Ask my AI assistant (Ctrl K)"
               >

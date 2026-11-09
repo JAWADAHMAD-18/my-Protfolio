@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sparkles } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useChat } from "@/components/chat/ChatProvider";
 
 interface NavItem {
   label: string;
@@ -41,6 +42,7 @@ export function Navbar() {
   const pathname = usePathname();
   const isScrolled = useIsScrolled();
   const isMac = useIsMac();
+  const { openChat } = useChat();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -142,9 +144,10 @@ export function Navbar() {
 
         {/* Right Desktop Actions */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Ask AI button (opens nothing yet) */}
+          {/* Ask AI button */}
           <button
             type="button"
+            onClick={openChat}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface text-xs font-mono text-muted hover:text-text hover:border-accent transition-colors cursor-pointer"
             aria-label="Ask AI (Ctrl K)"
           >
@@ -209,8 +212,11 @@ export function Navbar() {
           <div className="flex flex-col gap-3 pb-8 border-t border-border pt-6">
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-[12px] border border-border bg-surface text-sm font-mono text-muted"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openChat();
+              }}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-[12px] border border-border bg-surface text-sm font-mono text-muted cursor-pointer hover:border-accent"
             >
               <span className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-accent-text dark:text-accent" />

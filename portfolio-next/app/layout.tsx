@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ChatProvider } from "@/components/chat/ChatProvider";
+import { ChatModal } from "@/components/chat/ChatModal";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -46,12 +48,15 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-bg text-text selection:bg-accent/30 selection:text-text font-sans">
         <ThemeProvider>
-          <SkipToContent />
-          <Navbar />
-          <main id="main-content" className="flex-1 flex flex-col">
-            {children}
-          </main>
-          <Footer />
+          <ChatProvider>
+            <SkipToContent />
+            <Navbar />
+            <main id="main-content" className="flex-1 flex flex-col">
+              {children}
+            </main>
+            <Footer />
+            <ChatModal />
+          </ChatProvider>
         </ThemeProvider>
       </body>
     </html>
