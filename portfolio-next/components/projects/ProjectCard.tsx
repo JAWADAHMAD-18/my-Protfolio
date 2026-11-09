@@ -27,7 +27,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
           className="w-full shadow-sm"
         >
           <VideoLoop
-            poster={project.media?.src || "/portfolioTrip.png"}
+            poster={project.media?.src || "/media/tripfusion/poster.webp"}
             alt={project.media?.alt || `${project.title} preview`}
           />
         </DeviceFrame>

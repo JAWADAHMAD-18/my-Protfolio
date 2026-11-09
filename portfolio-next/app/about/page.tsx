@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowUpRight, GraduationCap, Award, Layers } from "lucide-react";
 import { stackGroups } from "@/data/stack";
 import { certifications } from "@/data/certifications";
@@ -10,6 +11,15 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Background, technical stack, education, and verified certifications of Jawad Ahmad, full-stack and AI application engineer.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About | Jawad Ahmad",
+    description:
+      "Background, technical stack, education, and verified certifications of Jawad Ahmad.",
+    url: "/about",
+  },
 };
 
 // Real testimonials definition. Currently supervisor testimonial requires [CONFIRM] per CONTENT.md.
@@ -76,6 +86,25 @@ export default function AboutPage() {
           </div>
 
           <aside className="lg:col-span-4 space-y-6">
+            <div className="relative max-w-[280px] lg:max-w-none">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-1.5 rounded-[28px] border border-accent/30 shadow-[0_0_0_5px_rgba(72,208,168,0.1)]"
+              />
+              <div className="relative overflow-hidden rounded-[24px] bg-[#121415] ring-1 ring-accent/35">
+                <Image
+                  src="/media/profile/jawad-about.webp"
+                  alt="Jawad Ahmad, full-stack and AI engineer"
+                  width={427}
+                  height={585}
+                  loading="lazy"
+                  unoptimized
+                  sizes="(max-width: 1024px) 280px, 360px"
+                  className="h-auto w-full"
+                />
+              </div>
+            </div>
+
             {/* Quick Facts Card */}
             <div className="p-6 rounded-[16px] border border-border bg-surface space-y-4">
               <p className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">

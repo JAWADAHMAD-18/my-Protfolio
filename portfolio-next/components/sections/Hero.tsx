@@ -1,48 +1,30 @@
-"use client";
-
-import * as React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
-import { DeviceFrame } from "@/components/media/DeviceFrame";
-import { VideoLoop } from "@/components/media/VideoLoop";
-import { useChat } from "@/components/chat/ChatProvider";
+import Image from "next/image";
+import { preload } from "react-dom";
+import { ArrowUpRight } from "lucide-react";
+import { AskAiButton } from "@/components/chat/AskAiButton";
 
-function useIsMac() {
-  return React.useSyncExternalStore(
-    () => () => {},
-    () => typeof navigator !== "undefined" && /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent),
-    () => false
-  );
-}
+const HERO_PHOTO = "/media/profile/jawad-hero.webp";
+const HERO_WIDTH = 427;
+const HERO_HEIGHT = 585;
 
 export function Hero() {
-  const isMac = useIsMac();
-  const { openChat } = useChat();
+  preload(HERO_PHOTO, { as: "image", fetchPriority: "high" });
 
   return (
-    <section className="relative w-full overflow-hidden pt-8 pb-14 md:pt-16 md:pb-20">
+    <section className="relative w-full overflow-hidden pt-6 pb-12 md:pt-16 md:pb-20">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          {/* Left Column: Text & CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7 flex flex-col items-start"
-          >
-            {/* Availability Badge */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-surface text-xs font-mono uppercase tracking-wider text-muted mb-4 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-accent" />
               <span>Available for work</span>
             </div>
 
-            {/* Name Line in Mono */}
             <p className="font-mono text-xs sm:text-sm uppercase tracking-widest text-muted mb-2.5 font-semibold">
               Jawad Ahmad
             </p>
 
-            {/* H1 Heading */}
             <h1 className="text-[32px] sm:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-[1.08] text-text mb-5 max-w-xl">
               Full-stack & AI{" "}
               <span className="font-serif italic font-normal text-accent-text dark:text-accent">
@@ -51,28 +33,23 @@ export function Hero() {
               engineer.
             </h1>
 
-            {/* Subtitle */}
             <p className="text-base sm:text-lg text-muted max-w-[65ch] leading-relaxed mb-6">
               Turning ideas into scalable, impactful products. Web, mobile and AI, built end to end.
             </p>
 
-            {/* Tech Line in Mono */}
             <p className="font-mono text-xs sm:text-sm text-muted mb-8 tracking-wide">
               React · Next.js · React Native · Node.js · Django · LLM APIs
             </p>
 
-            {/* 3 Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-              {/* Primary CTA */}
               <Link
                 href="/projects"
                 className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-accent text-on-accent hover:bg-accent-2 font-medium text-sm transition-colors shadow-xs"
               >
                 <span>View my work</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </Link>
 
-              {/* Secondary CTA */}
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-border bg-surface text-text hover:border-accent font-medium text-sm transition-colors shadow-xs"
@@ -80,60 +57,32 @@ export function Hero() {
                 Let&apos;s talk
               </Link>
 
-              {/* Ask AI Input-style Button */}
-              <button
-                type="button"
-                onClick={openChat}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border bg-surface-2/60 text-muted hover:text-text hover:border-accent text-sm font-mono transition-colors cursor-pointer"
-                aria-label="Ask my AI assistant (Ctrl K)"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-accent-text dark:text-accent" />
-                <span>Ask my AI</span>
-                <kbd className="px-1.5 py-0.5 rounded bg-surface border border-border text-[10px] uppercase text-muted">
-                  {isMac ? "⌘K" : "Ctrl K"}
-                </kbd>
-              </button>
+              <AskAiButton className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border bg-surface-2/60 text-muted hover:text-text hover:border-accent text-sm font-mono transition-colors cursor-pointer" />
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right Column: Real Project Visual (Browser + Phone mockups) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 relative w-full pt-2 pb-6 sm:pb-0"
-          >
-            <div className="relative mx-auto max-w-[340px] sm:max-w-[420px] lg:max-w-none pr-8 sm:pr-10 lg:pr-12">
-              {/* Background Browser Mockup */}
-              <DeviceFrame
-                type="browser"
-                url="tripfusion.vercel.app"
-                title="TripFusion Web Platform"
-                className="w-full shadow-md"
-              >
-                <VideoLoop
-                  poster="/media/placeholder/tripfusion-browser.png"
-                  alt="TripFusion travel platform browser mockup"
+          <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[220px] sm:max-w-[300px] lg:max-w-[380px]">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-2 rounded-[32px] border border-accent/35 shadow-[0_0_0_6px_rgba(72,208,168,0.12)]"
+              />
+              <div className="relative overflow-hidden rounded-[28px] bg-[#121415] ring-1 ring-accent/40">
+                <Image
+                  src={HERO_PHOTO}
+                  alt="Jawad Ahmad, full-stack and AI engineer"
+                  width={HERO_WIDTH}
+                  height={HERO_HEIGHT}
                   priority
+                  fetchPriority="high"
+                  decoding="sync"
+                  unoptimized
+                  sizes="(max-width: 640px) 220px, (max-width: 1024px) 300px, 380px"
+                  className="h-auto w-full"
                 />
-              </DeviceFrame>
-
-              {/* Foreground Mobile Phone Mockup */}
-              <div className="absolute -bottom-4 right-0 sm:-right-2 w-[110px] sm:w-[145px] md:w-[160px] z-10 drop-shadow-xl">
-                <DeviceFrame
-                  type="phone"
-                  title="TripFusion Mobile App"
-                  className="w-full border-border bg-surface shadow-lg"
-                >
-                  <VideoLoop
-                    poster="/media/placeholder/tripfusion-phone.png"
-                    alt="TripFusion companion mobile app mockup"
-                    priority
-                  />
-                </DeviceFrame>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

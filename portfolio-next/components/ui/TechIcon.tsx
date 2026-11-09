@@ -109,8 +109,7 @@ export function TechIcon({ name, className = "", size = 16 }: TechIconProps) {
   return (
     <span
       className={`inline-flex items-center justify-center text-currentColor ${className}`}
-      aria-label={name}
-      title={name}
+      aria-hidden="true"
     >
       <IconComponent size={size} className="text-currentColor" aria-hidden="true" />
     </span>

@@ -9,6 +9,15 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Web, mobile and AI engineering handled by one engineer from start to finish. Full-stack web, React Native apps, and conversational AI systems.",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Services | Jawad Ahmad",
+    description:
+      "Web, mobile and AI engineering handled by one engineer from start to finish.",
+    url: "/services",
+  },
 };
 
 export default function ServicesPage() {

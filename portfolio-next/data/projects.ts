@@ -54,7 +54,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL if public]
     media: {
       type: "image",
-      src: "/portfolioTrip.png",
+      src: "/media/tripfusion/poster.webp",
       alt: "TripFusion travel platform interface",
     },
     caseStudy: {
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL/private]
     media: {
       type: "image",
-      src: "/aiagent.jpeg",
+      src: "/media/ahmed-ai-voice-receptionist/poster.webp",
       alt: "Ahmed, AI Voice Receptionist",
     },
     caseStudy: {
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/portfolioHisabKitab.png",
+      src: "/media/hisab-kitab/poster.webp",
       alt: "Hisab Kitab personal finance tracker",
     },
     caseStudy: {
@@ -151,7 +151,7 @@ export const projects: Project[] = [
     github: "https://github.com/JAWADAHMAD-18/whatsapp_bot",
     media: {
       type: "image",
-      src: "/portfolioWhatsappBot.png",
+      src: "/media/whatsapp-auto-reply-assistant/poster.webp",
       alt: "WhatsApp Auto-Reply Assistant",
     },
   },
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/biztrack.png",
+      src: "/media/biztrack/poster.webp",
       alt: "BizTrack business management dashboard",
     },
   },
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/project2.jpg",
+      src: "/media/student-guidance-portal/poster.webp",
       alt: "Student Guidance Portal",
     },
   },
@@ -199,7 +199,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/myblog.png",
+      src: "/media/blogging-platform/poster.webp",
       alt: "Blogging Platform",
     },
   },
@@ -215,7 +215,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/rolex.png",
+      src: "/media/rolex-frontend/poster.webp",
       alt: "Rolex luxury watch website showcase",
     },
   },
@@ -231,7 +231,7 @@ export const projects: Project[] = [
     github: undefined, // [FILL: GitHub repository URL]
     media: {
       type: "image",
-      src: "/project1.jpg",
+      src: "/media/bata-clone/poster.webp",
       alt: "Bata website responsive clone",
     },
   },

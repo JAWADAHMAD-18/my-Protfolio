@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Jawad Ahmad for full-stack web development, React Native mobile apps, or AI systems engineering.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact | Jawad Ahmad",
+    description:
+      "Get in touch with Jawad Ahmad for full-stack web development, React Native mobile apps, or AI systems engineering.",
+    url: "/contact",
+  },
 };
 
 const DIRECT_LINKS = [

@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
@@ -10,6 +11,22 @@ export function AboutTeaser() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* About Teaser */}
           <div className="lg:col-span-7">
+            <div className="flex flex-col sm:flex-row gap-6 items-start">
+              <div className="relative w-[148px] shrink-0 sm:w-[168px]">
+                <div className="overflow-hidden rounded-[20px] bg-[#121415] ring-1 ring-accent/35">
+                  <Image
+                    src="/media/profile/jawad-about.webp"
+                    alt="Jawad Ahmad, full-stack and AI engineer"
+                    width={427}
+                    height={585}
+                    loading="lazy"
+                    unoptimized
+                    sizes="168px"
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
+              <div>
             <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2 font-semibold">
               About
             </p>
@@ -29,6 +46,8 @@ export function AboutTeaser() {
               <span>More about me</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
+              </div>
+            </div>
           </div>
 
           {/* Zalvro Line */}

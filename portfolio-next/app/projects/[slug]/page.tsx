@@ -32,6 +32,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: project.title,
     description: project.description,
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | Jawad Ahmad`,
+      description: project.tagline || project.description,
+      url: `/projects/${project.slug}`,
+    },
   };
 }
 
@@ -103,7 +111,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 className="w-full shadow-sm"
               >
                 <VideoLoop
-                  poster={project.media?.src || "/portfolioTrip.png"}
+                  poster={project.media?.src || "/media/tripfusion/poster.webp"}
                   alt={project.media?.alt || `${project.title} case study media`}
                   priority
                 />
@@ -195,7 +203,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 <div className="rounded-[12px] border border-border bg-surface p-2 overflow-hidden shadow-2xs">
                   <DeviceFrame type="browser" url={displayUrl} title={`${project.title} View 1`}>
                     <VideoLoop
-                      poster={project.media?.src || "/portfolioTrip.png"}
+                      poster={project.media?.src || "/media/tripfusion/poster.webp"}
                       alt={`${project.title} screenshot view 1`}
                     />
                   </DeviceFrame>
@@ -205,7 +213,7 @@ export default async function ProjectPage({ params }: PageProps) {
                     <div className="w-[180px]">
                       <DeviceFrame type="phone" title={`${project.title} Mobile Screen`}>
                         <VideoLoop
-                          poster="/media/placeholder/tripfusion-phone.png"
+                          poster="/media/tripfusion/phone.webp"
                           alt={`${project.title} mobile screenshot`}
                         />
                       </DeviceFrame>

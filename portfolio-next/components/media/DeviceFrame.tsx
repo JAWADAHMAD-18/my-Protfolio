@@ -18,8 +18,7 @@ export function DeviceFrame({
   if (type === "phone") {
     return (
       <div
-        className={`relative rounded-[32px] border-2 border-border bg-surface p-2 shadow-sm transition-all duration-300 ${className}`}
-        aria-label={`${title} mobile view`}
+        className={`relative rounded-[32px] border-2 border-border bg-surface p-2 shadow-sm ${className}`}
       >
         {/* Phone Dynamic Island / Notch */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 w-16 h-3.5 bg-border/90 rounded-full flex items-center justify-end pr-2">
@@ -36,8 +35,7 @@ export function DeviceFrame({
 
   return (
     <div
-      className={`relative rounded-[12px] border border-border bg-surface overflow-hidden shadow-sm transition-all duration-300 ${className}`}
-      aria-label={`${title} desktop view`}
+      className={`relative rounded-[12px] border border-border bg-surface overflow-hidden shadow-sm ${className}`}
     >
       {/* Browser Chrome Header */}
       <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-border bg-surface-2/70 select-none">

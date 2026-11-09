@@ -77,7 +77,7 @@ export function Navbar() {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-200 ${
         isScrolled
-          ? "bg-surface/85 backdrop-blur-md border-b border-border py-3"
+          ? "bg-surface/95 md:bg-surface/85 md:backdrop-blur-md border-b border-border py-3"
           : "bg-transparent border-b border-transparent py-4"
       }`}
     >
@@ -86,7 +86,6 @@ export function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2.5 text-text hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md py-1"
-          aria-label="Jawad Ahmad - Home"
         >
           <svg
             width="28"
@@ -149,7 +148,6 @@ export function Navbar() {
             type="button"
             onClick={openChat}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface text-xs font-mono text-muted hover:text-text hover:border-accent transition-colors cursor-pointer"
-            aria-label="Ask AI (Ctrl K)"
           >
             <Sparkles className="w-3.5 h-3.5 text-accent-text dark:text-accent" />
             <span>Ask AI</span>

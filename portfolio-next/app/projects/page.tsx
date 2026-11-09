@@ -6,6 +6,15 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Production web platforms, React Native mobile apps, and conversational AI systems built by Jawad Ahmad.",
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    title: "Projects | Jawad Ahmad",
+    description:
+      "Production web platforms, React Native mobile apps, and conversational AI systems built by Jawad Ahmad.",
+    url: "/projects",
+  },
 };
 
 export default function ProjectsPage() {

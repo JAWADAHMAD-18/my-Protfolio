@@ -10,6 +10,7 @@ interface VideoLoopProps {
   alt?: string;
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
 function usePrefersReducedMotion() {
@@ -31,67 +32,73 @@ export function VideoLoop({
   alt = "Project demonstration preview",
   className = "",
   priority = false,
+  sizes = "(max-width: 768px) 90vw, 480px",
 }: VideoLoopProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const canPlayVideo = Boolean(src) && !prefersReducedMotion;
+  const [hasBeenVisible, setHasBeenVisible] = React.useState(false);
+  const [inView, setInView] = React.useState(false);
 
   React.useEffect(() => {
     if (!canPlayVideo) return;
 
+    const el = containerRef.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!videoRef.current) return;
-          if (entry.isIntersecting) {
-            videoRef.current.play().catch(() => {
-              // Autoplay error catch
-            });
-          } else {
-            videoRef.current.pause();
-          }
-        });
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          setHasBeenVisible(true);
+          setInView(true);
+        } else {
+          setInView(false);
+        }
       },
       { threshold: 0.15 }
     );
 
-    const el = containerRef.current;
-    if (el) {
-      observer.observe(el);
-    }
-
-    return () => {
-      if (el) observer.unobserve(el);
-      observer.disconnect();
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [canPlayVideo]);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (inView) {
+      video.play().catch(() => {
+        // Autoplay can be blocked; the poster stays visible.
+      });
+    } else {
+      video.pause();
+    }
+  }, [inView, hasBeenVisible]);
 
   return (
     <div
       ref={containerRef}
       className={`relative w-full h-full overflow-hidden bg-surface-2 ${className}`}
     >
-      {/* Fallback & Poster image */}
       <Image
         src={poster}
         alt={alt}
         fill
         priority={priority}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-        className={`object-cover transition-opacity duration-300 ${
-          canPlayVideo ? "opacity-0" : "opacity-100"
-        }`}
+        unoptimized
+        sizes={sizes}
+        className="object-cover"
       />
 
-      {/* Video Loop when video src is provided and reduced motion is false */}
-      {canPlayVideo && src && (
+      {canPlayVideo && src && hasBeenVisible && (
         <video
           ref={videoRef}
           muted
           loop
           playsInline
-          autoPlay
+          preload="none"
           poster={poster}
           className="absolute inset-0 w-full h-full object-cover"
         >

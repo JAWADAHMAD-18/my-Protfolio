@@ -46,7 +46,7 @@ export function SelectedWork() {
               <article
                 key={project.slug}
                 style={{ top: topOffset }}
-                className="sticky rounded-[20px] border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-sm transition-all duration-300 hover:border-accent"
+                className="lg:sticky rounded-[20px] border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-sm hover:border-accent"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                   {/* Left Column: Information & Actions */}
@@ -136,8 +136,9 @@ export function SelectedWork() {
                         className="w-full shadow-md"
                       >
                         <VideoLoop
-                          poster={project.media?.src || "/portfolioTrip.png"}
+                          poster={project.media?.src || "/media/tripfusion/poster.webp"}
                           alt={project.media?.alt || `${project.title} preview`}
+                          sizes="(max-width: 1024px) 90vw, 480px"
                         />
                       </DeviceFrame>
                     </div>
