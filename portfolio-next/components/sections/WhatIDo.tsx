@@ -60,7 +60,7 @@ export function WhatIDo() {
           {CAPABILITIES.map((cap) => (
             <div
               key={cap.number}
-              className="flex flex-col justify-between p-6 sm:p-8 rounded-[16px] border border-border bg-surface"
+              className="flex flex-col justify-between p-6 sm:p-8 rounded-xl border border-border bg-surface"
             >
               <div>
                 {/* Mono Number */}
@@ -87,7 +87,7 @@ export function WhatIDo() {
                     {cap.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center gap-1.5 font-mono text-[11px] px-2 py-0.5 rounded-[6px] bg-surface-2 border border-border/70 text-muted"
+                        className="inline-flex items-center gap-1.5 font-mono text-[11px] px-2 py-0.5 rounded-full bg-surface-2 border border-border/70 text-muted"
                       >
                         <TechIcon name={tech} size={12} />
                         {tech}

@@ -11,12 +11,5 @@ const ChatModal = dynamic(
 
 export function LazyChatModal() {
   const { isOpen } = useChat();
-  const [hasOpened, setHasOpened] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isOpen) setHasOpened(true);
-  }, [isOpen]);
-
-  if (!hasOpened) return null;
-  return <ChatModal />;
+  return isOpen ? <ChatModal /> : null;
 }

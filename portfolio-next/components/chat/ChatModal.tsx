@@ -13,6 +13,20 @@ const SUGGESTION_CHIPS = [
 
 const MAX_INPUT_CHARS = 500;
 
+function TypingIndicator() {
+  return (
+    <span
+      role="status"
+      aria-label="Assistant is thinking"
+      className="inline-flex items-center gap-1.5 text-muted"
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+    </span>
+  );
+}
+
 export function ChatModal() {
   const {
     isOpen,
@@ -28,10 +42,12 @@ export function ChatModal() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
+  const previousFocusRef = React.useRef<HTMLElement | null>(null);
 
-  // Focus input when opened
   React.useEffect(() => {
     if (isOpen) {
+      previousFocusRef.current =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null;
       document.body.style.overflow = "hidden";
       const timer = setTimeout(() => {
         inputRef.current?.focus();
@@ -39,6 +55,9 @@ export function ChatModal() {
       return () => {
         clearTimeout(timer);
         document.body.style.overflow = "";
+        if (previousFocusRef.current?.isConnected) {
+          previousFocusRef.current.focus();
+        }
       };
     } else {
       document.body.style.overflow = "";
@@ -48,7 +67,11 @@ export function ChatModal() {
   // Scroll to bottom on new messages
   React.useEffect(() => {
     if (isOpen) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
     }
   }, [messages, isLoading, isOpen]);
 
@@ -57,23 +80,39 @@ export function ChatModal() {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeChat();
+        return;
+      }
       if (e.key !== "Tab" || !modalRef.current) return;
 
-      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusableElements.length === 0) return;
-
+      const focusableElements = Array.from(
+        modalRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => element.getClientRects().length > 0);
       const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+      const lastElement = focusableElements.at(-1);
+      if (!firstElement || !lastElement) {
+        e.preventDefault();
+        modalRef.current.focus();
+        return;
+      }
 
       if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
+        if (
+          document.activeElement === firstElement ||
+          !modalRef.current.contains(document.activeElement)
+        ) {
           e.preventDefault();
           lastElement.focus();
         }
       } else {
-        if (document.activeElement === lastElement) {
+        if (
+          document.activeElement === lastElement ||
+          !modalRef.current.contains(document.activeElement)
+        ) {
           e.preventDefault();
           firstElement.focus();
         }
@@ -82,7 +121,7 @@ export function ChatModal() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [closeChat, isOpen]);
 
   if (!isOpen) return null;
 
@@ -101,23 +140,24 @@ export function ChatModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-xs transition-opacity duration-200"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-overlay transition-opacity duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) closeChat();
       }}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="chat-dialog-title"
     >
       {/* Modal / Bottom-Sheet Container */}
       <div
         ref={modalRef}
-        className="w-full sm:max-w-2xl max-h-[88vh] sm:max-h-[80vh] flex flex-col bg-surface border border-border rounded-t-[20px] sm:rounded-[20px] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="chat-dialog-title"
+        tabIndex={-1}
+        className="w-full sm:max-w-2xl max-h-[88vh] sm:max-h-[80vh] flex flex-col bg-surface border border-border rounded-t-xl sm:rounded-xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-surface-2/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[10px] bg-accent/15 flex items-center justify-center text-accent-text dark:text-accent">
+            <div className="w-8 h-8 rounded-xl bg-accent/15 flex items-center justify-center text-accent-text dark:text-accent">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
@@ -138,7 +178,7 @@ export function ChatModal() {
               <button
                 type="button"
                 onClick={clearChat}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[8px] border border-border bg-surface text-xs font-mono text-muted hover:text-text hover:border-accent transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-border bg-surface text-xs font-mono text-muted hover:text-text hover:border-accent transition-colors cursor-pointer"
                 aria-label="Clear chat history"
                 title="Clear chat history"
               >
@@ -150,7 +190,7 @@ export function ChatModal() {
             <button
               type="button"
               onClick={closeChat}
-              className="w-8 h-8 rounded-[8px] border border-border bg-surface text-muted hover:text-text hover:border-accent flex items-center justify-center transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-xl border border-border bg-surface text-muted hover:text-text hover:border-accent flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close dialog (Esc)"
               title="Close (Esc)"
             >
@@ -205,20 +245,16 @@ export function ChatModal() {
                     className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}
                   >
                     <div
-                      className={`max-w-[85%] rounded-[16px] px-4 py-3 text-sm leading-relaxed ${
+                      className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
                         isUser
                           ? "bg-accent text-on-accent font-medium rounded-br-xs"
                           : msg.isError
-                          ? "bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 rounded-bl-xs"
+                          ? "bg-danger-bg border border-danger-border text-danger rounded-bl-xs"
                           : "bg-surface-2 border border-border/70 text-text rounded-bl-xs"
                       }`}
                     >
                       {msg.content || (
-                        <span className="inline-flex items-center gap-1.5 text-muted">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse [animation-delay:200ms]" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse [animation-delay:400ms]" />
-                        </span>
+                        <TypingIndicator />
                       )}
                     </div>
 
@@ -245,19 +281,15 @@ export function ChatModal() {
               {/* In-flight Typing indicator when waiting for initial response */}
               {isLoading && messages[messages.length - 1]?.role === "user" && (
                 <div className="flex items-start">
-                  <div className="rounded-[16px] px-4 py-3 bg-surface-2 border border-border/70 rounded-bl-xs">
-                    <span className="inline-flex items-center gap-1.5 text-muted">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse [animation-delay:200ms]" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse [animation-delay:400ms]" />
-                    </span>
+                  <div className="rounded-xl px-4 py-3 bg-surface-2 border border-border/70 rounded-bl-xs">
+                    <TypingIndicator />
                   </div>
                 </div>
               )}
 
               {/* Error banner if general error occurred */}
               {error && !messages.some((m) => m.content === error) && (
-                <div className="p-3 rounded-[12px] bg-red-500/10 border border-red-500/30 text-xs text-red-600 dark:text-red-400">
+                <div className="p-3 rounded-xl bg-danger-bg border border-danger-border text-xs text-danger">
                   {error}
                 </div>
               )}
@@ -278,7 +310,7 @@ export function ChatModal() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about projects, stack, or experience..."
               disabled={isLoading}
-              className="w-full px-4 py-3 pr-24 rounded-[12px] border border-border bg-surface-2 text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
+              className="w-full px-4 py-3 pr-24 rounded-xl border border-border bg-surface-2 text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:opacity-60"
             />
 
             <div className="absolute right-2 flex items-center gap-1.5">
@@ -290,7 +322,7 @@ export function ChatModal() {
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="w-8 h-8 rounded-[8px] bg-accent text-on-accent hover:bg-accent-2 flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
+                className="w-8 h-8 rounded-xl bg-accent text-on-accent hover:bg-accent-2 flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-2xs"
                 aria-label="Send message"
               >
                 <Send className="w-3.5 h-3.5" />

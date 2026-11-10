@@ -17,7 +17,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
     : `${project.slug}.internal`;
 
   return (
-    <article className="group flex flex-col rounded-[16px] border border-border bg-surface overflow-hidden shadow-xs transition-colors duration-200 hover:border-accent">
+    <article className="group flex flex-col rounded-xl border border-border bg-surface overflow-hidden shadow-xs transition-colors duration-200 hover:border-accent">
       {/* Media on Top (DeviceFrame or 16:9 container) */}
       <div className="p-4 sm:p-5 pb-0 bg-surface-2/40 border-b border-border/60">
         <DeviceFrame
@@ -54,7 +54,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
 
         {/* Title */}
         <h3 className="text-xl font-semibold tracking-tight text-text mb-2 group-hover:text-accent-text dark:group-hover:text-accent transition-colors">
-          <Link href={`/projects/${project.slug}`} className="focus:outline-none">
+          <Link href={`/projects/${project.slug}`}>
             {project.title}
           </Link>
         </h3>
@@ -69,7 +69,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
           {project.stack.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="font-mono text-[11px] px-2 py-0.5 rounded-[6px] bg-surface-2 border border-border/70 text-muted"
+              className="font-mono text-[11px] px-2 py-0.5 rounded-full bg-surface-2 border border-border/70 text-muted"
             >
               {tech}
             </span>

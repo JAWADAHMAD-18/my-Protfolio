@@ -1,21 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { preload } from "react-dom";
 import { ArrowUpRight } from "lucide-react";
 import { AskAiButton } from "@/components/chat/AskAiButton";
 
 const HERO_PHOTO = "/media/profile/jawad-hero.webp";
-const HERO_WIDTH = 427;
-const HERO_HEIGHT = 585;
 
 export function Hero() {
-  preload(HERO_PHOTO, { as: "image", fetchPriority: "high" });
-
   return (
-    <section className="relative w-full overflow-hidden pt-6 pb-12 md:pt-16 md:pb-20">
+    <section className="relative w-full overflow-hidden py-8 md:py-12 lg:py-14">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-center gap-8 md:gap-10">
+          <div className="order-2 md:order-1 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-surface text-xs font-mono uppercase tracking-wider text-muted mb-4 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-accent" />
               <span>Available for work</span>
@@ -25,7 +20,7 @@ export function Hero() {
               Jawad Ahmad
             </p>
 
-            <h1 className="text-[32px] sm:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-[1.08] text-text mb-5 max-w-xl">
+            <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-text mb-5 max-w-xl">
               Full-stack & AI{" "}
               <span className="font-serif italic font-normal text-accent-text dark:text-accent">
                 application
@@ -61,26 +56,18 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[220px] sm:max-w-[300px] lg:max-w-[380px]">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-2 rounded-[32px] border border-accent/35 shadow-[0_0_0_6px_rgba(72,208,168,0.12)]"
-              />
-              <div className="relative overflow-hidden rounded-[28px] bg-[#121415] ring-1 ring-accent/40">
+          <div className="order-1 md:order-2 flex justify-center md:justify-end">
+            <div className="relative aspect-[4/5] w-[120px] sm:w-[150px] md:w-full md:max-w-[420px] md:max-h-[min(70svh,520px)] overflow-hidden rounded-xl border border-border bg-surface">
                 <Image
                   src={HERO_PHOTO}
                   alt="Jawad Ahmad, full-stack and AI engineer"
-                  width={HERO_WIDTH}
-                  height={HERO_HEIGHT}
+                  width={447}
+                  height={558}
                   priority
                   fetchPriority="high"
-                  decoding="sync"
-                  unoptimized
-                  sizes="(max-width: 640px) 220px, (max-width: 1024px) 300px, 380px"
-                  className="h-auto w-full"
+                  sizes="(min-width: 1200px) 406px, (min-width: 768px) calc((100vw - 104px) * 0.37037), (min-width: 640px) 150px, 120px"
+                  className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
                 />
-              </div>
             </div>
           </div>
         </div>

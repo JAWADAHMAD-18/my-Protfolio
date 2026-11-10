@@ -58,9 +58,13 @@ export default async function ProjectPage({ params }: PageProps) {
   const displayUrl = project.live
     ? project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")
     : `${project.slug}.internal`;
+  const problem = project.caseStudy?.problem;
+  const highlights = project.caseStudy?.highlights;
+  const hasConfirmedCopy = (value?: string) =>
+    Boolean(value && !/\[(?:FILL|CONFIRM)\b/i.test(value));
 
   return (
-    <div className="w-full py-12 md:py-20">
+    <div className="w-full py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         {/* Back Link */}
         <Link
@@ -89,7 +93,7 @@ export default async function ProjectPage({ params }: PageProps) {
             )}
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-tight text-text mb-4">
+          <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-text mb-4">
             {project.title}
           </h1>
 
@@ -103,7 +107,7 @@ export default async function ProjectPage({ params }: PageProps) {
           {/* Main Case Study Content (8 cols) */}
           <div className="lg:col-span-8 space-y-2">
             {/* 1. Hero Preview / Media Top */}
-            <div className="rounded-[16px] border border-border bg-surface p-4 sm:p-6 mb-8 shadow-xs">
+            <div className="rounded-xl border border-border bg-surface p-4 sm:p-6 mb-8 shadow-xs">
               <DeviceFrame
                 type="browser"
                 url={displayUrl}
@@ -127,18 +131,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* 3. The Problem Section */}
             <CaseStudySection id="problem" badge="02 / The Challenge" title="The Problem">
-              {project.caseStudy?.problem ? (
+              {hasConfirmedCopy(problem) ? (
                 <p className="text-base text-text leading-relaxed">
-                  {project.caseStudy.problem}
+                  {problem}
                 </p>
               ) : (
-                <p className="text-base text-muted leading-relaxed">
-                  Every product addresses specific bottlenecks in usability, latency, and system integration.
-                </p>
+                <TodoBlock label="[FILL]">
+                  Add the confirmed problem statement for {project.title}.
+                </TodoBlock>
               )}
-              <TodoBlock label="[FILL]">
-                Missing specific problem statement for {project.title}. (Rendered in development only).
-              </TodoBlock>
             </CaseStudySection>
 
             {/* 4. What I Built */}
@@ -161,9 +162,6 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* 5. How It Works (Architecture Diagram) */}
             <CaseStudySection id="how-it-works" badge="04 / Flow" title="How It Works">
-              <p className="text-sm text-muted mb-4">
-                High-level architecture and data flow between client applications, backend services, and external integrations.
-              </p>
               <ArchitectureDiagram projectSlug={project.slug} />
             </CaseStudySection>
 
@@ -183,24 +181,21 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* 7. Highlights / Hard Parts */}
             <CaseStudySection id="highlights" badge="06 / Engineering" title="Key Highlights & Trade-offs">
-              {project.caseStudy?.highlights ? (
+              {hasConfirmedCopy(highlights) ? (
                 <p className="text-base text-text leading-relaxed">
-                  {project.caseStudy.highlights}
+                  {highlights}
                 </p>
               ) : (
-                <p className="text-base text-muted leading-relaxed">
-                  Architectural decisions focused on keeping latency minimal, state synchronized across devices, and maintaining zero unhandled exceptions.
-                </p>
+                <TodoBlock label="[FILL]">
+                  Add confirmed engineering highlights for {project.title}.
+                </TodoBlock>
               )}
-              <TodoBlock label="[FILL]">
-                Detailed engineering trade-offs and latency benchmarks for {project.title}. (Rendered in development only).
-              </TodoBlock>
             </CaseStudySection>
 
             {/* 8. Media Gallery */}
             <CaseStudySection id="gallery" badge="07 / Visuals" title="Interface Gallery">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-[12px] border border-border bg-surface p-2 overflow-hidden shadow-2xs">
+                <div className="rounded-xl border border-border bg-surface p-2 overflow-hidden shadow-2xs">
                   <DeviceFrame type="browser" url={displayUrl} title={`${project.title} View 1`}>
                     <VideoLoop
                       poster={project.media?.src || "/media/tripfusion/poster.webp"}
@@ -209,7 +204,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   </DeviceFrame>
                 </div>
                 {project.categories.includes("mobile") && (
-                  <div className="rounded-[12px] border border-border bg-surface p-2 overflow-hidden shadow-2xs flex items-center justify-center bg-surface-2/30">
+                  <div className="rounded-xl border border-border bg-surface p-2 overflow-hidden shadow-2xs flex items-center justify-center bg-surface-2/30">
                     <div className="w-[180px]">
                       <DeviceFrame type="phone" title={`${project.title} Mobile Screen`}>
                         <VideoLoop
@@ -226,16 +221,18 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {/* Sticky Side Summary Column (4 cols) */}
           <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-            <div className="rounded-[16px] border border-border bg-surface p-6 shadow-xs space-y-6">
+            <div className="rounded-xl border border-border bg-surface p-6 shadow-xs space-y-6">
               {/* Role & Timeline */}
               <div>
                 <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1 font-semibold">
                   Role & Timeline
                 </p>
                 <p className="text-sm font-medium text-text">
-                  {project.caseStudy?.roleAndTimeline || "Full-stack Engineer · 2025–2026"}
+                  {hasConfirmedCopy(project.caseStudy?.roleAndTimeline)
+                    ? project.caseStudy?.roleAndTimeline
+                    : null}
                 </p>
-                {!project.caseStudy?.roleAndTimeline && (
+                {!hasConfirmedCopy(project.caseStudy?.roleAndTimeline) && (
                   <TodoBlock label="[FILL]">
                     Specific project timeframe and role.
                   </TodoBlock>
@@ -340,7 +337,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 {nextProject.title}
               </span>
             </div>
-            <ArrowRight className="w-5 h-5 text-muted group-hover:text-accent-text dark:group-hover:text-accent group-hover:translate-x-1 transition-all" />
+            <ArrowRight className="w-5 h-5 text-muted group-hover:text-accent-text dark:group-hover:text-accent group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
       </div>

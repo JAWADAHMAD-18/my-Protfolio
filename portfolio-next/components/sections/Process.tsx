@@ -44,11 +44,11 @@ export function Process() {
         </div>
 
         {/* 4 Steps in One Line (stacked on mobile) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ol className="grid grid-cols-1 divide-y divide-border border-y border-border sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
           {STEPS.map((step) => (
-            <div
+            <li
               key={step.number}
-              className="p-6 rounded-[16px] border border-border bg-surface"
+              className="py-5 sm:px-5 sm:even:border-l sm:even:border-border lg:border-l lg:border-border lg:first:border-l-0 lg:first:pl-0"
             >
               <span className="block font-mono text-xs font-bold text-accent-text dark:text-accent mb-3">
                 {step.number}
@@ -59,9 +59,9 @@ export function Process() {
               <p className="text-sm text-muted leading-relaxed">
                 {step.description}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

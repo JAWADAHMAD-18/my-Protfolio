@@ -55,6 +55,7 @@ function saveMessages(msgs: ChatMessage[]) {
 // External chat store adhering to React 19 useSyncExternalStore
 class ChatStore {
   private messages: ChatMessage[] = [];
+  private readonly serverMessages: ChatMessage[] = [];
   private listeners = new Set<() => void>();
   private initialized = false;
 
@@ -67,7 +68,7 @@ class ChatStore {
   };
 
   getServerSnapshot = (): ChatMessage[] => {
-    return [];
+    return this.serverMessages;
   };
 
   subscribe = (listener: () => void): (() => void) => {

@@ -85,7 +85,7 @@ export function Navbar() {
         {/* Logo (ThemeToggle is NOT inside this link) */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-text hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md py-1"
+          className="flex items-center gap-2.5 text-text hover:opacity-90 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-md py-1"
         >
           <svg
             width="28"

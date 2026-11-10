@@ -55,14 +55,14 @@ export function ProjectsClientView() {
   }, [filteredProjects]);
 
   return (
-    <div className="w-full py-12 md:py-20">
+    <div className="w-full py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         {/* Header */}
         <div className="flex flex-col items-start gap-4 mb-10 md:mb-12">
           <p className="font-mono text-xs uppercase tracking-widest text-muted font-semibold">
             Projects Portfolio
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-tight text-text">
+          <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-text">
             Things I&apos;ve built and shipped.
           </h1>
           <p className="text-muted text-base sm:text-lg max-w-[65ch] leading-relaxed">
@@ -110,7 +110,7 @@ export function ProjectsClientView() {
               {moreProjects.map((project) => (
                 <div
                   key={project.slug}
-                  className="group py-5 sm:py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-surface-2/40 -mx-3 px-3 rounded-[8px]"
+                  className="group py-5 sm:py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors hover:bg-surface-2/40 -mx-3 px-3 rounded-xl"
                 >
                   {/* Left: Title + Tagline */}
                   <div className="flex-1 max-w-xl">
@@ -142,7 +142,7 @@ export function ProjectsClientView() {
                     {project.stack.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="font-mono text-[11px] px-2 py-0.5 rounded-[6px] bg-surface-2 border border-border/70 text-muted"
+                        className="font-mono text-[11px] px-2 py-0.5 rounded-full bg-surface-2 border border-border/70 text-muted"
                       >
                         {tech}
                       </span>
@@ -191,7 +191,7 @@ export function ProjectsClientView() {
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 border border-dashed border-border rounded-[16px]">
+          <div className="text-center py-20 border border-dashed border-border rounded-xl">
             <p className="text-muted text-base mb-4">No projects found matching category &quot;{currentFilter}&quot;.</p>
             <button
               type="button"

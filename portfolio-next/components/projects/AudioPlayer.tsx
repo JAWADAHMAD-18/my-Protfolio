@@ -37,30 +37,34 @@ export function AudioPlayer({
   const [isMuted, setIsMuted] = React.useState(false);
   const [transcript, setTranscript] = React.useState<TranscriptLine[]>([]);
   const [activeLineId, setActiveLineId] = React.useState<number | null>(null);
+  const [transcriptError, setTranscriptError] = React.useState<string | null>(null);
+  const [playbackError, setPlaybackError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     fetch(transcriptSrc)
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) throw new Error("Transcript request failed.");
+        return response.json();
+      })
       .then((data: TranscriptLine[]) => setTranscript(data))
       .catch(() => {
-        // Fallback placeholder transcript
-        setTranscript([
-          {
-            id: 1,
-            speaker: "Ahmed (AI Receptionist)",
-            time: 0,
-            text: "Hello, thank you for calling. How can I assist you today?",
-          },
-        ]);
+        setTranscriptError("The transcript could not be loaded.");
       });
   }, [transcriptSrc]);
+
+  const playAudio = () => {
+    audioRef.current?.play().then(
+      () => setPlaybackError(null),
+      () => setPlaybackError("Audio playback could not start.")
+    );
+  };
 
   const togglePlay = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play().catch(() => {});
+      playAudio();
     }
   };
 
@@ -95,7 +99,7 @@ export function AudioPlayer({
     if (!audioRef.current) return;
     audioRef.current.currentTime = time;
     if (!isPlaying) {
-      audioRef.current.play().catch(() => {});
+      playAudio();
     }
   };
 
@@ -108,16 +112,16 @@ export function AudioPlayer({
   const restart = () => {
     if (!audioRef.current) return;
     audioRef.current.currentTime = 0;
-    audioRef.current.play().catch(() => {});
+    playAudio();
   };
 
   return (
-    <div className={`rounded-[16px] border border-border bg-surface overflow-hidden shadow-sm ${className}`}>
+    <div className={`rounded-xl border border-border bg-surface overflow-hidden shadow-sm ${className}`}>
       {/* Player Header & Controls */}
       <div className="p-5 sm:p-6 border-b border-border bg-surface-2/40">
         <div className="flex items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full bg-accent" aria-hidden="true" />
             <h3 className="font-semibold text-base text-text">{title}</h3>
           </div>
           <span className="font-mono text-xs text-muted">
@@ -145,7 +149,7 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={togglePlay}
-              className="w-10 h-10 rounded-full bg-accent text-on-accent hover:bg-accent-2 flex items-center justify-center transition-colors shadow-xs cursor-pointer"
+              className="w-10 h-10 rounded-full bg-accent text-on-accent hover:bg-accent-2 flex items-center justify-center transition-colors duration-200 shadow-xs cursor-pointer"
               aria-label={isPlaying ? "Pause audio demo" : "Play audio demo"}
             >
               {isPlaying ? (
@@ -189,13 +193,28 @@ export function AudioPlayer({
           onEnded={() => setIsPlaying(false)}
           className="hidden"
         />
+        {playbackError && (
+          <p role="alert" className="mt-3 text-xs text-danger">
+            {playbackError}
+          </p>
+        )}
       </div>
 
       {/* Transcript Synchronized List */}
-      <div className="p-5 sm:p-6 bg-surface max-h-[360px] overflow-y-auto">
+      <div
+        className="p-5 sm:p-6 bg-surface max-h-[360px] overflow-y-auto"
+        role="region"
+        aria-label="Call transcript"
+        tabIndex={0}
+      >
         <p className="font-mono text-xs uppercase tracking-wider text-muted mb-4 font-semibold">
           Synchronized Call Transcript (Click to jump)
         </p>
+        {transcriptError && (
+          <p role="alert" className="text-sm text-danger">
+            {transcriptError}
+          </p>
+        )}
         <div className="space-y-3">
           {transcript.map((line) => {
             const isActive = activeLineId === line.id;
@@ -206,7 +225,7 @@ export function AudioPlayer({
                 key={line.id}
                 type="button"
                 onClick={() => handleJumpToLine(line.time)}
-                className={`w-full text-left p-3 rounded-[10px] border transition-all cursor-pointer ${
+                className={`w-full text-left p-3 rounded-xl border transition-colors duration-200 cursor-pointer ${
                   isActive
                     ? "bg-accent/10 border-accent text-text shadow-xs"
                     : "bg-surface-2/40 border-border/60 hover:border-border text-muted"

@@ -13,6 +13,10 @@
   --accent-2: #18D0A0;      /* hover, small highlights */
   --accent-text: #0A7D5E;   /* accent used as TEXT/links on light (AA contrast) */
   --on-accent: #04130E;     /* text on accent fills */
+  --danger: #B42318;
+  --danger-border: #FECACA;
+  --danger-bg: #FEF2F2;
+  --overlay: rgb(0 0 0 / 60%);
 }
 
 .dark {
@@ -23,6 +27,9 @@
   --text: #ECEEEE;
   --muted: #8B9094;
   --accent-text: #48D0A8;
+  --danger: #FCA5A5;
+  --danger-border: #7F1D1D;
+  --danger-bg: #451A1A;
 }
 
 @theme inline {
@@ -36,6 +43,10 @@
   --color-accent-2: var(--accent-2);
   --color-accent-text: var(--accent-text);
   --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-danger-border: var(--danger-border);
+  --color-danger-bg: var(--danger-bg);
+  --color-overlay: var(--overlay);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;

@@ -12,23 +12,31 @@ export function ArchitectureDiagram({
 }: ArchitectureDiagramProps) {
   if (projectSlug === "tripfusion") {
     return (
-      <div className={`w-full rounded-[16px] border border-border bg-surface p-6 ${className}`}>
+      <div className={`w-full rounded-xl border border-border bg-surface p-6 ${className}`}>
         <div className="flex items-center justify-between mb-4">
           <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
             System Architecture
           </span>
-          <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-border">
-            [CONFIRM: architecture details]
-          </span>
+          {process.env.NODE_ENV !== "production" && (
+            <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-border">
+              [CONFIRM: architecture details]
+            </span>
+          )}
         </div>
 
         {/* Theme-Aware Inline SVG Diagram for TripFusion */}
-        <div className="w-full overflow-x-auto py-2">
+        <div
+          className="w-full overflow-x-auto py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="Scroll horizontally to view the architecture diagram"
+        >
           <svg
             viewBox="0 0 760 260"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="w-full min-w-[640px] h-auto select-none font-sans"
+            role="img"
             aria-label="TripFusion System Architecture Diagram"
           >
             {/* Defs for arrow markers */}
@@ -84,15 +92,15 @@ export function ArchitectureDiagram({
 
             {/* Column 3: Data Stores & AI */}
             <rect x="580" y="25" width="160" height="70" rx="10" fill="var(--surface-2)" stroke="var(--border)" strokeWidth="1.5" />
-            <text x="660" y="55" textAnchor="middle" fill="var(--text)" fontSize="13" fontWeight="600">MongoDB Atlas</text>
-            <text x="660" y="75" textAnchor="middle" fill="var(--muted)" fontSize="11">User & Booking Data</text>
+            <text x="660" y="55" textAnchor="middle" fill="var(--text)" fontSize="13" fontWeight="600">MongoDB</text>
+            <text x="660" y="75" textAnchor="middle" fill="var(--muted)" fontSize="11">Travel Data</text>
 
             <rect x="580" y="105" width="160" height="55" rx="10" fill="var(--surface-2)" stroke="var(--border)" strokeWidth="1.5" />
             <text x="660" y="132" textAnchor="middle" fill="var(--text)" fontSize="13" fontWeight="600">Redis Cache</text>
-            <text x="660" y="148" textAnchor="middle" fill="var(--muted)" fontSize="10">Session & Package Cache</text>
+            <text x="660" y="148" textAnchor="middle" fill="var(--muted)" fontSize="10">Cache</text>
 
             <rect x="580" y="170" width="160" height="65" rx="10" fill="var(--surface-2)" stroke="var(--border)" strokeWidth="1.5" />
-            <text x="660" y="198" textAnchor="middle" fill="var(--text)" fontSize="13" fontWeight="600">Recommendation Bot</text>
+            <text x="660" y="198" textAnchor="middle" fill="var(--text)" fontSize="13" fontWeight="600">Rule-based Bot API</text>
             <text x="660" y="218" textAnchor="middle" fill="var(--muted)" fontSize="10">Rule-based Package API</text>
           </svg>
         </div>
@@ -106,23 +114,31 @@ export function ArchitectureDiagram({
 
   if (projectSlug === "ahmed-ai-voice-receptionist") {
     return (
-      <div className={`w-full rounded-[16px] border border-border bg-surface p-6 ${className}`}>
+      <div className={`w-full rounded-xl border border-border bg-surface p-6 ${className}`}>
         <div className="flex items-center justify-between mb-4">
           <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
             Voice Agent Pipeline
           </span>
-          <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-border">
-            [CONFIRM: actual pipeline flow]
-          </span>
+          {process.env.NODE_ENV !== "production" && (
+            <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-2 text-muted border border-border">
+              [CONFIRM: actual pipeline flow]
+            </span>
+          )}
         </div>
 
         {/* Theme-Aware Inline SVG Diagram for Ahmed */}
-        <div className="w-full overflow-x-auto py-2">
+        <div
+          className="w-full overflow-x-auto py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          tabIndex={0}
+          role="region"
+          aria-label="Scroll horizontally to view the voice agent pipeline"
+        >
           <svg
             viewBox="0 0 760 210"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="w-full min-w-[640px] h-auto select-none font-sans"
+            role="img"
             aria-label="Ahmed AI Voice Receptionist Flow Diagram"
           >
             <defs>
@@ -193,7 +209,7 @@ export function ArchitectureDiagram({
 
   // Generic flow for other projects
   return (
-    <div className={`w-full rounded-[16px] border border-border bg-surface p-6 ${className}`}>
+    <div className={`w-full rounded-xl border border-border bg-surface p-6 ${className}`}>
       <div className="flex items-center justify-between mb-4">
         <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
           Architecture Flow

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
+import { ogColors } from "@/lib/design-tokens";
 
 export const alt = "Jawad Ahmad | Full-stack & AI Application Engineer";
 export const size = {
@@ -24,7 +25,7 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0A0B0C",
+          backgroundColor: ogColors.background,
           padding: "80px",
           fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           position: "relative",
@@ -38,7 +39,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             height: "4px",
-            backgroundColor: "#48D0A8",
+            backgroundColor: ogColors.accent,
           }}
         />
 
@@ -63,12 +64,12 @@ export default async function Image() {
                 width: "48px",
                 height: "48px",
                 borderRadius: "12px",
-                backgroundColor: "#121415",
-                border: "1.5px solid #26292C",
+                backgroundColor: ogColors.surface,
+                border: `1.5px solid ${ogColors.border}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#48D0A8",
+                color: ogColors.accent,
                 fontSize: "20px",
                 fontWeight: 700,
                 letterSpacing: "0.05em",
@@ -79,7 +80,7 @@ export default async function Image() {
             </div>
             <span
               style={{
-                color: "#ECEEEE",
+                color: ogColors.text,
                 fontSize: "24px",
                 fontWeight: 600,
                 letterSpacing: "-0.02em",
@@ -96,9 +97,9 @@ export default async function Image() {
               gap: "8px",
               padding: "8px 16px",
               borderRadius: "999px",
-              backgroundColor: "#121415",
-              border: "1px solid #26292C",
-              color: "#8B9094",
+              backgroundColor: ogColors.surface,
+              border: `1px solid ${ogColors.border}`,
+              color: ogColors.muted,
               fontSize: "14px",
               fontFamily: "monospace",
               textTransform: "uppercase",
@@ -110,7 +111,7 @@ export default async function Image() {
                 width: "8px",
                 height: "8px",
                 borderRadius: "999px",
-                backgroundColor: "#48D0A8",
+                backgroundColor: ogColors.accent,
               }}
             />
             Available for work
@@ -136,7 +137,7 @@ export default async function Image() {
           >
             <h1
               style={{
-                color: "#ECEEEE",
+                color: ogColors.text,
                 fontSize: "56px",
                 fontWeight: 700,
                 letterSpacing: "-0.03em",
@@ -148,7 +149,7 @@ export default async function Image() {
             </h1>
             <p
               style={{
-                color: "#8B9094",
+                color: ogColors.muted,
                 fontSize: "26px",
                 lineHeight: 1.4,
                 margin: 0,
@@ -168,7 +169,7 @@ export default async function Image() {
               objectFit: "cover",
               objectPosition: "center top",
               borderRadius: "28px",
-              border: "3px solid rgba(72, 208, 168, 0.55)",
+              border: `3px solid ${ogColors.accent}`,
             }}
           />
         </div>
@@ -180,13 +181,13 @@ export default async function Image() {
             alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            borderTop: "1px solid #26292C",
+            borderTop: `1px solid ${ogColors.border}`,
             paddingTop: "24px",
           }}
         >
           <div
             style={{
-              color: "#8B9094",
+              color: ogColors.muted,
               fontSize: "18px",
               fontFamily: "monospace",
               letterSpacing: "0.02em",
@@ -197,7 +198,7 @@ export default async function Image() {
 
           <div
             style={{
-              color: "#48D0A8",
+              color: ogColors.accent,
               fontSize: "18px",
               fontFamily: "monospace",
               fontWeight: 600,

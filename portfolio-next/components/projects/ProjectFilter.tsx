@@ -70,7 +70,7 @@ function FilterContent({
             <span>{filter.label}</span>
             <span
               className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                isActive ? "bg-black/20 text-on-accent" : "bg-surface-2 text-muted"
+                isActive ? "bg-on-accent/10 text-on-accent" : "bg-surface-2 text-muted"
               }`}
             >
               {count}

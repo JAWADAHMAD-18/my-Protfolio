@@ -19,6 +19,7 @@ export function ContactForm() {
   const [errors, setErrors] = React.useState<FormErrors>({});
   const [status, setStatus] = React.useState<"idle" | "sending" | "success" | "error">("idle");
   const [serverError, setServerError] = React.useState<string | null>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -46,6 +47,11 @@ export function ContactForm() {
     setServerError(null);
 
     if (!validate()) {
+      requestAnimationFrame(() => {
+        formRef.current
+          ?.querySelector<HTMLElement>('[aria-invalid="true"]')
+          ?.focus();
+      });
       return;
     }
 
@@ -79,7 +85,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="rounded-[20px] border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-xs">
+    <div className="rounded-xl border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-xs">
       <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-text mb-2">
         Send a message
       </h2>
@@ -99,7 +105,7 @@ export function ContactForm() {
         )}
 
         {status === "error" && (
-          <div className="p-4 rounded-[12px] bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-danger-bg border border-danger-border text-danger flex items-start gap-3">
             <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
             <p className="text-sm font-medium">
               {serverError || "Something went wrong. Please try again or email me directly."}
@@ -108,7 +114,7 @@ export function ContactForm() {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">
         {/* Honeypot field (hidden from view and screen readers) */}
         <div aria-hidden="true" className="sr-only">
           <label htmlFor="company-field">Do not fill this field</label>
@@ -134,6 +140,7 @@ export function ContactForm() {
           <input
             id="contact-name"
             type="text"
+            required
             value={formData.name}
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value });
@@ -143,12 +150,12 @@ export function ContactForm() {
             disabled={status === "sending"}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? "name-error" : undefined}
-            className={`w-full px-4 py-3 rounded-[12px] border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              errors.name ? "border-red-500" : "border-border hover:border-border/80"
+            className={`w-full px-4 py-3 rounded-xl border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
+              errors.name ? "border-danger" : "border-border hover:border-border/80"
             }`}
           />
           {errors.name && (
-            <p id="name-error" className="mt-1.5 text-xs text-red-500 font-mono">
+            <p id="name-error" className="mt-1.5 text-xs text-danger font-mono">
               {errors.name}
             </p>
           )}
@@ -165,6 +172,7 @@ export function ContactForm() {
           <input
             id="contact-email"
             type="email"
+            required
             value={formData.email}
             onChange={(e) => {
               setFormData({ ...formData, email: e.target.value });
@@ -174,12 +182,12 @@ export function ContactForm() {
             disabled={status === "sending"}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
-            className={`w-full px-4 py-3 rounded-[12px] border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              errors.email ? "border-red-500" : "border-border hover:border-border/80"
+            className={`w-full px-4 py-3 rounded-xl border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
+              errors.email ? "border-danger" : "border-border hover:border-border/80"
             }`}
           />
           {errors.email && (
-            <p id="email-error" className="mt-1.5 text-xs text-red-500 font-mono">
+            <p id="email-error" className="mt-1.5 text-xs text-danger font-mono">
               {errors.email}
             </p>
           )}
@@ -196,6 +204,7 @@ export function ContactForm() {
           <textarea
             id="contact-message"
             rows={5}
+            required
             value={formData.message}
             onChange={(e) => {
               setFormData({ ...formData, message: e.target.value });
@@ -205,12 +214,12 @@ export function ContactForm() {
             disabled={status === "sending"}
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? "message-error" : undefined}
-            className={`w-full px-4 py-3 rounded-[12px] border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent resize-y ${
-              errors.message ? "border-red-500" : "border-border hover:border-border/80"
+            className={`w-full px-4 py-3 rounded-xl border bg-surface text-text text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface resize-y ${
+              errors.message ? "border-danger" : "border-border hover:border-border/80"
             }`}
           />
           {errors.message && (
-            <p id="message-error" className="mt-1.5 text-xs text-red-500 font-mono">
+            <p id="message-error" className="mt-1.5 text-xs text-danger font-mono">
               {errors.message}
             </p>
           )}

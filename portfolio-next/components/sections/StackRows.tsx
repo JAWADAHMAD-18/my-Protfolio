@@ -21,7 +21,7 @@ export function StackRows() {
           {stackGroups.map((group) => (
             <div
               key={group.category}
-              className="p-5 sm:p-6 rounded-[16px] border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4"
+              className="p-5 sm:p-6 rounded-xl border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4"
             >
               <div className="w-48 shrink-0">
                 <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
@@ -33,7 +33,7 @@ export function StackRows() {
                 {group.items.map((tech) => (
                   <div
                     key={tech}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-[8px] bg-surface-2 border border-border/70 text-xs font-mono text-text"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-2 border border-border/70 text-xs font-mono text-text"
                   >
                     <TechIcon name={tech} size={15} />
                     <span>{tech}</span>

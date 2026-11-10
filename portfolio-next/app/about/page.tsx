@@ -33,42 +33,55 @@ const REAL_TESTIMONIALS: Testimonial[] = [];
 
 export default function AboutPage() {
   return (
-    <div className="w-full py-12 md:py-20">
+    <div className="w-full py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mb-14 md:mb-18">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2 font-semibold">
-            Background & Credentials
-          </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-tight text-text mb-6">
-            About me.
-          </h1>
-          <p className="text-muted text-base sm:text-lg leading-relaxed">
-            Full-stack and AI application engineer with 2+ years of hands-on building across web platforms, companion mobile apps, and LLM automation systems.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-12 md:gap-x-12 md:gap-y-8 mb-20 md:mb-24">
+          {/* Header */}
+          <div className="md:col-span-8 md:col-start-1 md:row-start-1">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2 font-semibold">
+              Background & Credentials
+            </p>
+            <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-text mb-6">
+              About me.
+            </h1>
+            <p className="text-muted text-base sm:text-lg leading-relaxed">
+              I&apos;m Jawad, a full-stack and AI application engineer.
+            </p>
+          </div>
 
-        {/* 2-Column Story Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20 md:mb-24">
-          <div className="lg:col-span-8 space-y-5 text-base sm:text-lg text-text leading-relaxed">
+          <div className="flex justify-center md:col-span-4 md:col-start-9 md:row-span-2 md:row-start-1 md:sticky md:top-24 md:justify-end self-start">
+            <div className="relative aspect-[4/5] w-[144px] sm:w-[168px] md:w-full md:max-w-[340px] overflow-hidden rounded-xl border border-border bg-surface">
+              <Image
+                src="/media/profile/jawad-about.webp"
+                alt="Jawad Ahmad, full-stack and AI engineer"
+                width={447}
+                height={558}
+                loading="lazy"
+                sizes="(min-width: 1180px) 340px, (min-width: 768px) calc(33.333vw - 53.33px), (min-width: 640px) 168px, 144px"
+                className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-5 text-base sm:text-lg text-text leading-relaxed md:col-span-8 md:col-start-1 md:row-start-2">
             <p>
-              I graduated with a BS in Computer Science from the Islamia University of Bahawalpur (2022–2026). Over the past two years, my focus has been on turning ideas into reliable, production-ready software.
+              I graduated with a BS in Computer Science from the Islamia University of Bahawalpur (2022–2026).
             </p>
             <p>
-              I develop full-stack web applications using React, Next.js, Node.js, and Django, alongside cross-platform mobile apps in React Native and Expo that share the same backend infrastructure.
+              I&apos;ve been building for 2+ years: web apps with React, Next.js, Node.js and Django, mobile apps with React Native, and AI systems such as voice agents and automations.
             </p>
             <p>
-              For my final year project, <strong className="font-semibold text-text">TripFusion</strong>, I engineered an AI-assisted travel platform with token-based authentication (access and refresh tokens), real-time customer support chat over WebSockets, and a synchronized mobile app.
+              My final year project, <strong className="font-semibold text-text">TripFusion</strong>, is a full-stack travel platform with real-time chat, token-based auth and a mobile app on the same backend.
             </p>
             <p>
-              Currently, I am going deeper into AI automation, conversational voice receptionists (VAPI and ElevenLabs), and TypeScript architecture.
+              I&apos;m currently going deeper into AI automation, conversational voice agents and TypeScript.
             </p>
 
             <TodoBlock label="[FILL]">
               One personal line on engineering principles or work philosophy. (Hidden in production).
             </TodoBlock>
 
-            <div className="pt-4 p-6 rounded-[16px] bg-surface-2/60 border border-border/80 text-sm text-muted">
+            <div className="pt-4 p-6 rounded-xl bg-surface-2/60 border border-border/80 text-sm text-muted">
               <p>
                 For teams and businesses, I also take on studio engagements through{" "}
                 <a
@@ -80,56 +93,84 @@ export default function AboutPage() {
                   <span>Zalvro</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
-                , focusing on custom AI automation workflows and web development.
+                , my AI automation and web development studio.
               </p>
             </div>
+
+            <aside>
+              {/* Quick Facts Card */}
+              <div className="p-6 rounded-xl border border-border bg-surface space-y-4">
+                <p className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
+                  Quick Summary
+                </p>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <span className="text-muted block text-xs font-mono">Degree</span>
+                    <span className="font-medium text-text">BS Computer Science</span>
+                  </div>
+                  <div>
+                    <span className="text-muted block text-xs font-mono">Alma Mater</span>
+                    <span className="font-medium text-text">Islamia University of Bahawalpur</span>
+                  </div>
+                  <div>
+                    <span className="text-muted block text-xs font-mono">Experience</span>
+                    <span className="font-medium text-text">2+ Years Production Building</span>
+                  </div>
+                  <div>
+                    <span className="text-muted block text-xs font-mono">Primary Focus</span>
+                    <span className="font-medium text-text">Web, Mobile & AI Voice Systems</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <section className="border-t border-border pt-8 mt-8">
+              <div className="flex items-center gap-2 mb-2">
+                <GraduationCap className="w-4 h-4 text-accent-text dark:text-accent" />
+                <p className="font-mono text-xs uppercase tracking-widest text-muted font-semibold">
+                  Education
+                </p>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.03em] text-text mb-8">
+                Academic Background
+              </h2>
+
+              <div className="space-y-4">
+                <div className="p-6 sm:p-8 rounded-xl border border-border bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-text mb-1">
+                      Bachelor of Science in Computer Science
+                    </h3>
+                    <p className="text-sm text-muted">
+                      Islamia University of Bahawalpur
+                    </p>
+                  </div>
+                  <div className="font-mono text-xs text-muted px-3 py-1.5 rounded-full bg-surface-2 border border-border shrink-0 self-start sm:self-auto">
+                    2022 — 2026
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-8 rounded-xl border border-border bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-text mb-1">
+                      Pre-Engineering (FSc)
+                    </h3>
+                    <p className="text-sm text-muted">
+                      Punjab College Hasilpur
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                    <div className="font-mono text-xs text-muted px-3 py-1.5 rounded-full bg-surface-2 border border-border shrink-0">
+                      2020 — 2022
+                    </div>
+                    <div className="font-mono text-xs text-muted px-3 py-1.5 rounded-full bg-surface-2 border border-border shrink-0">
+                      Grade A
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-
-          <aside className="lg:col-span-4 space-y-6">
-            <div className="relative max-w-[280px] lg:max-w-none">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-1.5 rounded-[28px] border border-accent/30 shadow-[0_0_0_5px_rgba(72,208,168,0.1)]"
-              />
-              <div className="relative overflow-hidden rounded-[24px] bg-[#121415] ring-1 ring-accent/35">
-                <Image
-                  src="/media/profile/jawad-about.webp"
-                  alt="Jawad Ahmad, full-stack and AI engineer"
-                  width={427}
-                  height={585}
-                  loading="lazy"
-                  unoptimized
-                  sizes="(max-width: 1024px) 280px, 360px"
-                  className="h-auto w-full"
-                />
-              </div>
-            </div>
-
-            {/* Quick Facts Card */}
-            <div className="p-6 rounded-[16px] border border-border bg-surface space-y-4">
-              <p className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
-                Quick Summary
-              </p>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <span className="text-muted block text-xs font-mono">Degree</span>
-                  <span className="font-medium text-text">BS Computer Science</span>
-                </div>
-                <div>
-                  <span className="text-muted block text-xs font-mono">Alma Mater</span>
-                  <span className="font-medium text-text">Islamia University of Bahawalpur</span>
-                </div>
-                <div>
-                  <span className="text-muted block text-xs font-mono">Experience</span>
-                  <span className="font-medium text-text">2+ Years Production Building</span>
-                </div>
-                <div>
-                  <span className="text-muted block text-xs font-mono">Primary Focus</span>
-                  <span className="font-medium text-text">Web, Mobile & AI Voice Systems</span>
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
 
         {/* Stack Section with id="stack" */}
@@ -151,7 +192,7 @@ export default function AboutPage() {
             {stackGroups.map((group) => (
               <div
                 key={group.category}
-                className="p-5 sm:p-6 rounded-[16px] border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4"
+                className="p-5 sm:p-6 rounded-xl border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
                 <div className="w-48 shrink-0">
                   <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
@@ -163,7 +204,7 @@ export default function AboutPage() {
                   {group.items.map((tech) => (
                     <div
                       key={tech}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-[8px] bg-surface-2 border border-border/70 text-xs font-mono text-text"
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-2 border border-border/70 text-xs font-mono text-text"
                     >
                       <TechIcon name={tech} size={15} />
                       <span>{tech}</span>
@@ -172,33 +213,6 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Education Section */}
-        <section className="border-t border-border pt-16 md:pt-20 mb-20 md:mb-24">
-          <div className="flex items-center gap-2 mb-2">
-            <GraduationCap className="w-4 h-4 text-accent-text dark:text-accent" />
-            <p className="font-mono text-xs uppercase tracking-widest text-muted font-semibold">
-              Education
-            </p>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.03em] text-text mb-8">
-            Academic Background
-          </h2>
-
-          <div className="p-6 sm:p-8 rounded-[16px] border border-border bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-xl font-semibold text-text mb-1">
-                Bachelor of Science in Computer Science
-              </h3>
-              <p className="text-sm text-muted">
-                Islamia University of Bahawalpur
-              </p>
-            </div>
-            <div className="font-mono text-xs text-muted px-3 py-1.5 rounded-full bg-surface-2 border border-border shrink-0 self-start sm:self-auto">
-              2022 — 2026
-            </div>
           </div>
         </section>
 
@@ -217,29 +231,21 @@ export default function AboutPage() {
             Professional DataCamp certifications in embeddings, deep learning, prompt engineering, and Python efficiency.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="divide-y divide-border border-y border-border">
             {certifications.map((cert) => (
               <a
                 key={cert.name}
                 href={cert.verifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-5 rounded-[14px] border border-border bg-surface hover:border-accent flex flex-col justify-between gap-4 transition-colors shadow-2xs"
+                className="group flex flex-col gap-2 py-4 transition-colors hover:text-accent-text dark:hover:text-accent sm:flex-row sm:items-center sm:justify-between sm:gap-6"
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-muted">
-                      {cert.issuer}
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-accent-text dark:group-hover:text-accent transition-colors" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-text group-hover:text-accent-text dark:group-hover:text-accent transition-colors line-clamp-2">
-                    {cert.name}
-                  </h3>
-                </div>
-
-                <span className="font-mono text-[11px] text-accent-text dark:text-accent font-medium">
-                  Verify statement &rarr;
+                <span className="text-sm font-semibold text-text group-hover:text-accent-text dark:group-hover:text-accent">
+                  {cert.name}
+                </span>
+                <span className="inline-flex items-center gap-2 font-mono text-[11px] text-muted group-hover:text-accent-text dark:group-hover:text-accent">
+                  {cert.issuer} <span>·</span> Verify statement
+                  <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                 </span>
               </a>
             ))}
@@ -260,7 +266,7 @@ export default function AboutPage() {
               {REAL_TESTIMONIALS.map((t, idx) => (
                 <blockquote
                   key={idx}
-                  className="p-6 rounded-[16px] border border-border bg-surface"
+                  className="p-6 rounded-xl border border-border bg-surface"
                 >
                   <p className="text-base text-text italic mb-4 leading-relaxed">
                     &ldquo;{t.quote}&rdquo;

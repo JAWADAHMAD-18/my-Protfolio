@@ -6,7 +6,7 @@ export function FinalCTA() {
   return (
     <section aria-label="Contact call to action" className="w-full py-16 md:py-24 border-t border-border">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-        <div className="p-8 sm:p-12 md:p-16 rounded-[20px] border border-border bg-surface text-center">
+        <div className="p-8 sm:p-12 md:p-16 rounded-xl border border-border bg-surface text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.03em] text-text mb-4 max-w-xl mx-auto">
             Got an idea or a product that needs building?
           </h2>

@@ -18,7 +18,7 @@ export function TodoBlock({
 
   return (
     <div
-      className={`my-3 p-3 rounded-[8px] border border-dashed border-border bg-surface-2/70 text-xs font-mono text-muted flex items-start gap-2.5 ${className}`}
+      className={`my-3 p-3 rounded-xl border border-dashed border-border bg-surface-2/70 text-xs font-mono text-muted flex items-start gap-2.5 ${className}`}
       role="note"
       aria-label="Development TODO"
     >

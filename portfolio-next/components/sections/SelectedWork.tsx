@@ -46,7 +46,7 @@ export function SelectedWork() {
               <article
                 key={project.slug}
                 style={{ top: topOffset }}
-                className="lg:sticky rounded-[20px] border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-sm hover:border-accent"
+                className="lg:sticky rounded-xl border border-border bg-surface p-6 sm:p-8 md:p-10 shadow-sm hover:border-accent"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                   {/* Left Column: Information & Actions */}
@@ -78,7 +78,7 @@ export function SelectedWork() {
                       {project.stack.slice(0, 6).map((tech) => (
                         <span
                           key={tech}
-                          className="font-mono text-xs px-2.5 py-1 rounded-[8px] bg-surface-2/80 border border-border/80 text-muted"
+                          className="font-mono text-xs px-2.5 py-1 rounded-full bg-surface-2/80 border border-border/80 text-muted"
                         >
                           {tech}
                         </span>

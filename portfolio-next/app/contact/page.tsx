@@ -69,14 +69,14 @@ const DIRECT_LINKS = [
 
 export default function ContactPage() {
   return (
-    <div className="w-full py-12 md:py-20">
+    <div className="w-full py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         {/* Header */}
         <div className="max-w-2xl mb-12 md:mb-16">
           <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2 font-semibold">
             Contact
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-tight text-text mb-4">
+          <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-text mb-4">
             Let&apos;s talk.
           </h1>
           <p className="text-muted text-base sm:text-lg leading-relaxed">
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group p-4 rounded-[16px] border border-border bg-surface hover:border-accent flex items-center justify-between transition-colors shadow-2xs"
+                  className="group p-4 rounded-xl border border-border bg-surface hover:border-accent flex items-center justify-between transition-colors shadow-2xs"
                 >
                   <div className="flex items-center gap-3.5">
                     <div className="w-10 h-10 rounded-[12px] bg-surface-2 border border-border flex items-center justify-center text-text shrink-0">
@@ -120,10 +120,9 @@ export default function ContactPage() {
               ))}
             </div>
 
-            <div className="p-5 rounded-[16px] bg-surface-2/60 border border-border/80 text-xs text-muted leading-relaxed mt-6">
-              <p className="font-semibold text-text mb-1">Looking for a studio or team engagement?</p>
+            <div className="p-5 rounded-xl bg-surface-2/60 border border-border/80 text-xs text-muted leading-relaxed mt-6">
               <p>
-                For larger agency-style projects or enterprise automations, I also operate via{" "}
+                For teams and businesses, I also work through{" "}
                 <a
                   href={siteConfig.links.zalvro}
                   target="_blank"
@@ -132,6 +131,7 @@ export default function ContactPage() {
                 >
                   Zalvro
                 </a>
+                , my AI automation and web development studio
                 .
               </p>
             </div>
