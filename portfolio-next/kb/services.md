@@ -14,4 +14,4 @@ React Native and Expo apps that share a backend with the web product, including 
 AI voice receptionists, chat assistants, WhatsApp automations and workflow automation using LLM APIs, VAPI, ElevenLabs and n8n. Examples: Ahmed (AI Voice Receptionist), WhatsApp Auto-Reply Assistant.
 
 ## Working with Jawad
-To discuss a project, use the contact page or email jawadahmad5618@gmail.com. Team or longer engagements can also go through Zalvro. [CONFIRM: add any process details Jawad wants shared]
+To discuss a project, use the contact page or email jawadahmad5618@gmail.com. Team or longer engagements can also go through Zalvro. I am available for freelance work.
