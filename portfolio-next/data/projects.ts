@@ -2,11 +2,11 @@ export type ProjectCategory = "web" | "mobile" | "ai";
 
 export interface ProjectCaseStudy {
   overview: string;
-  problem?: string; // [FILL]
+  problem?: string;
   built: string[];
-  architecture?: string; // [CONFIRM]
-  highlights?: string; // [FILL]
-  roleAndTimeline?: string; // [FILL]
+  architecture?: string;
+  highlights?: string;
+  roleAndTimeline?: string;
 }
 
 export interface ProjectMedia {
@@ -35,69 +35,67 @@ export const projects: Project[] = [
     slug: "tripfusion",
     title: "TripFusion",
     tagline: "An AI-assisted travel platform for booking flights, hotels and custom packages, with a React Native companion app on the same backend.",
-    description: "AI-powered travel platform for booking flights, hotels and custom packages with smart recommendations.",
+    description: "AI-assisted travel platform for booking flights, hotels and custom packages, with web and React Native clients on one backend.",
     categories: ["web", "mobile"],
     featured: true,
     stack: [
-      "React",
+      "React 19",
       "Node.js",
       "Express",
       "MongoDB",
       "Redis",
-      "JWT",
-      "Google OAuth",
-      "Socket.io",
+      "Socket.IO",
+      "Amadeus API",
+      "Gemini AI",
       "React Native",
-      "Expo",
     ],
     live: "https://tripfusion.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL if public]
+    github: "https://github.com/JAWADAHMAD-18/FYP-project",
     media: {
       type: "image",
       src: "/media/tripfusion/poster.webp",
       alt: "TripFusion travel platform interface",
     },
     caseStudy: {
-      overview: "Full-stack travel platform with token-based authentication (Access + Refresh tokens), realtime chat using Socket.io, and AI-assisted features. Includes a companion mobile app in React Native and Expo using the same backend.",
-      problem: "[FILL: specific challenge TripFusion addresses in travel booking]",
+      overview: "A travel platform with AI-assisted planning and real-time features. Its web and React Native clients share one backend.",
+      problem: "Large travel datasets from a third-party API could slow the experience. Redis caching lets large responses load in seconds.",
       built: [
-        "Full-stack travel platform with token-based authentication (access and refresh tokens), Google OAuth, and Redis.",
-        "Real-time chat with Socket.io.",
-        "React Native and Expo companion app using the same backend.",
-        "AI-assisted features include a rule-based chatbot API.",
+        "React 19 web client and a React Native mobile app using the same backend.",
+        "Express API with MongoDB for data and Redis for caching.",
+        "Amadeus API integration for travel data and Gemini AI-assisted travel planning.",
+        "Real-time features powered by Socket.IO.",
       ],
-      architecture: "Clients (Web & Mobile) -> API (Node/Express) -> MongoDB + Redis; Socket.io channel for chat [CONFIRM details]",
-      highlights: "[FILL: technical challenges overcome during development]",
-      roleAndTimeline: "Solo Developer, Final Year Project (2025–2026) [CONFIRM: solo]",
+      architecture: "React 19 web and React Native clients -> Express API -> MongoDB for data, Redis for caching, Amadeus for travel data, Gemini for AI, and Socket.IO for real-time features.",
+      highlights: "Redis caching keeps large third-party travel API responses loading in seconds. Gemini assists with travel planning, and the web and mobile clients share one backend.",
+      roleAndTimeline: "Solo, end to end. About 2 months for the initial build, working weekends alongside university classes as a final year project; improved afterwards.",
     },
   },
   {
     slug: "ahmed-ai-voice-receptionist",
     title: "Ahmed, AI Voice Receptionist",
-    tagline: "A voice agent that answers clinic calls in real time, handles questions and books appointments using natural speech.",
-    description: "Conversational AI voice agent that handles clinic calls in real time, answering queries and booking appointments using natural speech.",
+    tagline: "An AI voice agent that takes incoming calls through booking and sends a confirmation email automatically.",
+    description: "An AI voice agent workflow that takes an incoming call through booking, saves the record, and sends a confirmation email automatically.",
     categories: ["ai"],
     featured: true,
-    stack: ["VAPI", "ElevenLabs", "Groq", "n8n"],
+    stack: ["n8n"],
     // Per standing rules: Do NOT carry Google Drive link. Local audio player demo on page.
     live: undefined,
-    github: undefined, // [FILL/private]
+    github: undefined,
     media: {
       type: "image",
       src: "/media/ahmed-ai-voice-receptionist/poster.webp",
       alt: "Ahmed, AI Voice Receptionist",
     },
     caseStudy: {
-      overview: "Conversational AI voice agent that handles clinic phone calls in real time, resolves inquiries with natural speech, and coordinates appointment scheduling.",
-      problem: "[FILL: clinic receptionist call volume and missed patient appointments]",
+      overview: "An AI voice agent workflow that takes a call through booking, saves the record, and sends a confirmation email automatically.",
       built: [
-        "VAPI and ElevenLabs provide the voice interface.",
-        "n8n and Groq handle calls and appointment booking.",
-        "The page includes Jawad's test-call audio with a transcript.",
+        "An n8n workflow takes an incoming call through conversation and booking.",
+        "The workflow saves the booking record and sends a confirmation email automatically.",
+        "Automated tests are all passing.",
       ],
-      architecture: "Caller -> VAPI (Telephony & Speech) -> n8n Workflow -> Groq LLM -> Appointment Booking [CONFIRM actual flow]",
-      highlights: "[FILL: optimizing voice latency under 800ms for natural dialogue]",
-      roleAndTimeline: "AI Automation Engineer (2025–2026) [CONFIRM]",
+      architecture: "Incoming call -> conversation -> booking -> save the record -> send a confirmation email automatically.",
+      highlights: "Takes a call end to end and turns it into a confirmed booking, a saved record, and an automatic confirmation email. Automated tests are all passing.",
+      roleAndTimeline: "Solo-built in about 2 days.",
     },
   },
   {
@@ -106,36 +104,40 @@ export const projects: Project[] = [
     tagline: "A personal finance tracker with monthly income and expense tracking, WhatsApp voice-note logging and LLM-written email reports.",
     description: "AI-powered personal finance tracker with monthly expense and income tracking, WhatsApp voice-note logging and LLM-generated narrative email reports.",
     categories: ["web", "ai"],
-    // [CONFIRM whether a React Native mobile companion exists; if yes add 'mobile' category]
     featured: true,
     stack: [
       "Next.js",
       "TypeScript",
-      "MongoDB",
-      "NextAuth.js",
+      "MongoDB Atlas",
+      "Mongoose",
+      "NextAuth",
       "Tailwind CSS",
       "Framer Motion",
+      "Recharts",
       "Groq",
+      "Brevo",
+      "WhatsApp Cloud API",
+      "Vercel",
     ],
     live: "https://hissab-kitab-eosin.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/Hissab_Kitab",
     media: {
       type: "image",
       src: "/media/hisab-kitab/poster.webp",
       alt: "Hisab Kitab personal finance tracker",
     },
     caseStudy: {
-      overview: "Personal finance platform combining monthly financial tracking with WhatsApp voice-note transaction recording and LLM-written analytical email reports.",
-      problem: "[FILL: high friction in traditional expense tracking and lack of actionable insights]",
+      overview: "A personal finance app for tracking income and expenses, logging transactions by voice or WhatsApp, and receiving AI-written email summaries.",
+      problem: "A deprecated LLM model began returning 404 errors, breaking voice entry, WhatsApp, and reports. Centralizing model names in one config with an environment override and fallback model restored those flows. The app also handles mixed Urdu, Roman Urdu, and English speech for voice entry.",
       built: [
-        "Next.js app using TypeScript, MongoDB, and NextAuth.js.",
-        "Monthly income and expense tracking.",
-        "WhatsApp voice-note logging.",
-        "LLM-generated narrative email reports.",
+        "Income and expense logging by voice and WhatsApp, detecting income versus expense from speech.",
+        "Per-category and overall budgets with alerts.",
+        "AI-written monthly and weekly email summaries, plus PDF statements.",
+        "Installable PWA; a native mobile app is coming soon.",
       ],
-      architecture: "Next.js + NextAuth -> MongoDB Atlas; Groq LLM for report generation [CONFIRM]",
-      highlights: "[FILL: parsing conversational Urdu/English voice notes into structured transaction records]",
-      roleAndTimeline: "Full-stack Developer (2025–2026) [CONFIRM]",
+      architecture: "Next.js full-stack app on Vercel -> MongoDB Atlas; Groq for transcription and extraction; WhatsApp Cloud API webhook; cron-driven emails via Brevo.",
+      highlights: "Voice entry handles mixed Urdu, Roman Urdu, and English speech. A centralized model config with an environment override and fallback prevents a deprecated model from breaking voice, WhatsApp, and reports together.",
+      roleAndTimeline: "Solo, end to end. About 2 weeks to build; updates and patches continue.",
     },
   },
   {
@@ -157,13 +159,13 @@ export const projects: Project[] = [
   {
     slug: "biztrack",
     title: "BizTrack",
-    tagline: "A full-stack business management application with comprehensive dashboard and data analytics.",
-    description: "A full-stack business management app built with Appwrite.",
+    tagline: "A business tracking application for managing expenses and sales.",
+    description: "A business tracking application for managing expenses and sales, built solo in about a week.",
     categories: ["web"],
     featured: false,
-    stack: ["React", "Appwrite", "Tailwind CSS", "JavaScript"],
+    stack: ["React", "Vite", "Appwrite", "Tailwind CSS", "Material-UI", "Recharts"],
     live: "https://biztrack-j.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/React-Projects/tree/main/BizTrack",
     media: {
       type: "image",
       src: "/media/biztrack/poster.webp",
@@ -173,13 +175,13 @@ export const projects: Project[] = [
   {
     slug: "student-guidance-portal",
     title: "Student Guidance Portal",
-    tagline: "A Django platform that connects students and teachers, with role-based access and guidance features.",
-    description: "A Django platform that connects students and teachers, with role-based access and guidance features.",
+    tagline: "A Django web portal for student guidance, with teacher profiles and photo uploads.",
+    description: "A Django web portal for student guidance, with teacher profiles and photo uploads, built solo in about a week.",
     categories: ["web"],
     featured: false,
-    stack: ["Django", "Python", "HTML5", "CSS3", "JavaScript"],
+    stack: ["Python", "Django", "HTML templates"],
     live: "https://jawad.pythonanywhere.com/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/portal",
     media: {
       type: "image",
       src: "/media/student-guidance-portal/poster.webp",
@@ -189,13 +191,13 @@ export const projects: Project[] = [
   {
     slug: "blogging-platform",
     title: "Blogging Platform",
-    tagline: "A full-stack blogging platform with authentication and content management.",
-    description: "A full-stack blogging platform with authentication and content management.",
+    tagline: "A blog and post management platform with rich text editing.",
+    description: "A blog and post management platform with rich text editing, built solo in about a week.",
     categories: ["web"],
     featured: false,
-    stack: ["React", "Appwrite", "Tailwind CSS"],
+    stack: ["React", "Redux Toolkit", "Appwrite", "TinyMCE", "Tailwind CSS"],
     live: "https://myblog-j.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/React-Projects/tree/main/megaProject",
     media: {
       type: "image",
       src: "/media/blogging-platform/poster.webp",
@@ -205,13 +207,13 @@ export const projects: Project[] = [
   {
     slug: "rolex-frontend",
     title: "Rolex Frontend",
-    tagline: "A modern frontend for a Rolex-themed luxury showcase website.",
-    description: "A modern frontend for a Rolex-themed website.",
+    tagline: "An interactive website with 3D animations and luxury service pages.",
+    description: "An interactive website with 3D animations and luxury service pages, built solo in about a week.",
     categories: ["web"],
     featured: false,
-    stack: ["React", "Tailwind CSS"],
+    stack: ["React", "Three.js", "GSAP", "Tailwind CSS", "Swiper"],
     live: "https://rolex-j.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/React-Projects/tree/main/Rolex",
     media: {
       type: "image",
       src: "/media/rolex-frontend/poster.webp",
@@ -221,13 +223,13 @@ export const projects: Project[] = [
   {
     slug: "bata-clone",
     title: "Bata Clone",
-    tagline: "A fully responsive clone of the Bata e-commerce landing page.",
-    description: "A fully responsive clone of the Bata website.",
+    tagline: "A hand-coded clone of the Bata website page, built from scratch.",
+    description: "A hand-coded clone of the Bata website page, built from scratch in about 2 weeks.",
     categories: ["web"],
     featured: false,
-    stack: ["HTML5", "CSS3", "JavaScript"],
+    stack: ["HTML5", "CSS", "JavaScript", "Framer Motion"],
     live: "https://bata-clone-page.vercel.app/",
-    github: undefined, // [FILL: GitHub repository URL]
+    github: "https://github.com/JAWADAHMAD-18/bata-clone-page",
     media: {
       type: "image",
       src: "/media/bata-clone/poster.webp",

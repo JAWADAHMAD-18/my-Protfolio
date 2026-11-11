@@ -4,6 +4,7 @@ export interface SiteConfig {
   tagline: string;
   bio: string;
   email: string;
+  responseTime: string;
   whatsapp: {
     number: string;
     display: string;
@@ -27,6 +28,7 @@ export const siteConfig: SiteConfig = {
   tagline: "Turning ideas into scalable, impactful products. Web, mobile and AI, built end to end.",
   bio: "Full-stack and AI application engineer building web apps, React Native mobile apps and AI voice and chat systems, from idea to production.",
   email: "jawadahmad5618@gmail.com",
+  responseTime: "Usually within a few hours.",
   whatsapp: {
     number: "+923037741461",
     display: "+92 303 7741461",
@@ -40,7 +42,6 @@ export const siteConfig: SiteConfig = {
   resume: {
     url: "/resume.pdf",
     fallback: "/contact",
-    // Per DESIGN.md section 12: resume.pdf will be provided later. Safe fallback to /contact
-    exists: false,
+    exists: true,
   },
 };

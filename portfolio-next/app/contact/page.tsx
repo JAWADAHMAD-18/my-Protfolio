@@ -80,7 +80,7 @@ export default function ContactPage() {
             Let&apos;s talk.
           </h1>
           <p className="text-muted text-base sm:text-lg leading-relaxed">
-            Tell me about your project or idea. I read every message and reply with honest next steps.
+            Tell me about your project or idea. I read every message. {siteConfig.responseTime}
           </p>
         </div>
 

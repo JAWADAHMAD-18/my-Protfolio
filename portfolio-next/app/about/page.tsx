@@ -5,7 +5,6 @@ import { stackGroups } from "@/data/stack";
 import { certifications } from "@/data/certifications";
 import { siteConfig } from "@/data/site";
 import { TechIcon } from "@/components/ui/TechIcon";
-import { TodoBlock } from "@/components/projects/TodoBlock";
 
 export const metadata: Metadata = {
   title: "About",
@@ -22,14 +21,20 @@ export const metadata: Metadata = {
   },
 };
 
-// Real testimonials definition. Currently supervisor testimonial requires [CONFIRM] per CONTENT.md.
 interface Testimonial {
   quote: string;
   author: string;
   role: string;
 }
 
-const REAL_TESTIMONIALS: Testimonial[] = [];
+const REAL_TESTIMONIALS: Testimonial[] = [
+  {
+    quote:
+      "The UI and UX are both good, but the backend optimization is excellent. Even large API data loads within seconds, with good use of Redis.",
+    author: "Dr. Akmal",
+    role: "FYP Supervisor, Department of Computer Science, Islamia University of Bahawalpur (IUB)",
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -77,9 +82,9 @@ export default function AboutPage() {
               I&apos;m currently going deeper into AI automation, conversational voice agents and TypeScript.
             </p>
 
-            <TodoBlock label="[FILL]">
-              One personal line on engineering principles or work philosophy. (Hidden in production).
-            </TodoBlock>
+            <p>
+              I value clear communication and steady progress, with working software to review along the way.
+            </p>
 
             <div className="pt-4 p-6 rounded-xl bg-surface-2/60 border border-border/80 text-sm text-muted">
               <p>
@@ -285,10 +290,6 @@ export default function AboutPage() {
           </section>
         )}
 
-        {/* Development TODO for Testimonial */}
-        <TodoBlock label="[CONFIRM]">
-          Supervisor testimonial quote and permission confirmation needed before public release.
-        </TodoBlock>
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ import { projects, getBySlug } from "@/data/projects";
 import { CaseStudySection } from "@/components/projects/CaseStudySection";
 import { ArchitectureDiagram } from "@/components/projects/ArchitectureDiagram";
 import { AudioPlayer } from "@/components/projects/AudioPlayer";
-import { TodoBlock } from "@/components/projects/TodoBlock";
 import { DeviceFrame } from "@/components/media/DeviceFrame";
 import { VideoLoop } from "@/components/media/VideoLoop";
 import { TechIcon } from "@/components/ui/TechIcon";
@@ -60,8 +59,6 @@ export default async function ProjectPage({ params }: PageProps) {
     : `${project.slug}.internal`;
   const problem = project.caseStudy?.problem;
   const highlights = project.caseStudy?.highlights;
-  const hasConfirmedCopy = (value?: string) =>
-    Boolean(value && !/\[(?:FILL|CONFIRM)\b/i.test(value));
 
   return (
     <div className="w-full py-16 md:py-24">
@@ -130,17 +127,13 @@ export default async function ProjectPage({ params }: PageProps) {
             </CaseStudySection>
 
             {/* 3. The Problem Section */}
-            <CaseStudySection id="problem" badge="02 / The Challenge" title="The Problem">
-              {hasConfirmedCopy(problem) ? (
+            {problem && (
+              <CaseStudySection id="problem" badge="02 / The Challenge" title="The Problem">
                 <p className="text-base text-text leading-relaxed">
                   {problem}
                 </p>
-              ) : (
-                <TodoBlock label="[FILL]">
-                  Add the confirmed problem statement for {project.title}.
-                </TodoBlock>
-              )}
-            </CaseStudySection>
+              </CaseStudySection>
+            )}
 
             {/* 4. What I Built */}
             <CaseStudySection id="built" badge="03 / Architecture" title="What I Built">
@@ -162,7 +155,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* 5. How It Works (Architecture Diagram) */}
             <CaseStudySection id="how-it-works" badge="04 / Flow" title="How It Works">
-              <ArchitectureDiagram projectSlug={project.slug} />
+              <ArchitectureDiagram
+                projectSlug={project.slug}
+                architecture={project.caseStudy?.architecture}
+              />
             </CaseStudySection>
 
             {/* 6. Special Audio Demo (Ahmed Voice Agent) */}
@@ -180,17 +176,13 @@ export default async function ProjectPage({ params }: PageProps) {
             )}
 
             {/* 7. Highlights / Hard Parts */}
-            <CaseStudySection id="highlights" badge="06 / Engineering" title="Key Highlights & Trade-offs">
-              {hasConfirmedCopy(highlights) ? (
+            {highlights && (
+              <CaseStudySection id="highlights" badge="06 / Engineering" title="Key Highlights & Trade-offs">
                 <p className="text-base text-text leading-relaxed">
                   {highlights}
                 </p>
-              ) : (
-                <TodoBlock label="[FILL]">
-                  Add confirmed engineering highlights for {project.title}.
-                </TodoBlock>
-              )}
-            </CaseStudySection>
+              </CaseStudySection>
+            )}
 
             {/* 8. Media Gallery */}
             <CaseStudySection id="gallery" badge="07 / Visuals" title="Interface Gallery">
@@ -223,21 +215,16 @@ export default async function ProjectPage({ params }: PageProps) {
           <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
             <div className="rounded-xl border border-border bg-surface p-6 shadow-xs space-y-6">
               {/* Role & Timeline */}
-              <div>
-                <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1 font-semibold">
-                  Role & Timeline
-                </p>
-                <p className="text-sm font-medium text-text">
-                  {hasConfirmedCopy(project.caseStudy?.roleAndTimeline)
-                    ? project.caseStudy?.roleAndTimeline
-                    : null}
-                </p>
-                {!hasConfirmedCopy(project.caseStudy?.roleAndTimeline) && (
-                  <TodoBlock label="[FILL]">
-                    Specific project timeframe and role.
-                  </TodoBlock>
-                )}
-              </div>
+              {project.caseStudy?.roleAndTimeline && (
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1 font-semibold">
+                    Role & Timeline
+                  </p>
+                  <p className="text-sm font-medium text-text">
+                    {project.caseStudy.roleAndTimeline}
+                  </p>
+                </div>
+              )}
 
               {/* Categories */}
               <div className="border-t border-border/70 pt-4">
@@ -292,7 +279,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   </a>
                 )}
 
-                {project.github ? (
+                {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
@@ -305,10 +292,6 @@ export default async function ProjectPage({ params }: PageProps) {
                     </span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-muted" />
                   </a>
-                ) : (
-                  <TodoBlock label="[FILL]">
-                    GitHub URL for {project.title} (if public repository).
-                  </TodoBlock>
                 )}
               </div>
             </div>
