@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="flex justify-center md:col-span-4 md:col-start-9 md:row-span-2 md:row-start-1 md:sticky md:top-24 md:justify-end self-start">
             <div className="relative aspect-[4/5] w-[144px] sm:w-[168px] md:w-full md:max-w-[340px] overflow-hidden rounded-xl border border-border bg-surface">
               <Image
-                src="/media/profile/jawad-about.webp"
+                src="/media/profile/jawad-hero.webp"
                 alt="Jawad Ahmad, full-stack and AI engineer"
                 width={447}
                 height={558}

@@ -52,7 +52,6 @@ export function Hero() {
                 Let&apos;s talk
               </Link>
 
-              <AskAiButton className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border bg-surface-2/60 text-muted hover:text-text hover:border-accent text-sm font-mono transition-colors cursor-pointer" />
             </div>
           </div>
 

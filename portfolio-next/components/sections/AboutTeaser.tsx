@@ -14,7 +14,7 @@ export function AboutTeaser() {
             <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] gap-6 items-center">
               <div className="relative mx-auto aspect-[4/5] w-[144px] sm:mx-0 sm:w-full sm:max-w-[240px] overflow-hidden rounded-xl border border-border bg-surface">
                 <Image
-                  src="/media/profile/jawad-about.webp"
+                  src="/media/profile/jawad-hero.webp"
                   alt="Jawad Ahmad, full-stack and AI engineer"
                   width={447}
                   height={558}
