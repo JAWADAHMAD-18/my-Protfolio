@@ -61,6 +61,36 @@ body {
   min-height: 100vh;
 }
 
+@keyframes chat-typing-pulse {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.chat-typing-dot {
+  animation: chat-typing-pulse 1.2s ease-in-out infinite;
+}
+
+.chat-typing-dot-delayed {
+  animation-delay: 0.2s;
+}
+
+.chat-typing-dot-later {
+  animation-delay: 0.4s;
+}
+
+.chat-typing-static {
+  display: none;
+}
+
 /* Accessibility: focus ring per DESIGN.md section 10 */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -83,6 +113,15 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .chat-typing-dot {
+    display: none;
+    animation: none;
+  }
+
+  .chat-typing-static {
+    display: inline;
+  }
+
   *,
   *::before,
   *::after {

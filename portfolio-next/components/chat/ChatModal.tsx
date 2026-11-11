@@ -17,12 +17,25 @@ function TypingIndicator() {
   return (
     <span
       role="status"
+      aria-live="polite"
       aria-label="Assistant is thinking"
       className="inline-flex items-center gap-1.5 text-muted"
     >
-      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
-      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
-      <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+      <span
+        className="chat-typing-dot w-1.5 h-1.5 rounded-full bg-accent"
+        aria-hidden="true"
+      />
+      <span
+        className="chat-typing-dot chat-typing-dot-delayed w-1.5 h-1.5 rounded-full bg-accent"
+        aria-hidden="true"
+      />
+      <span
+        className="chat-typing-dot chat-typing-dot-later w-1.5 h-1.5 rounded-full bg-accent"
+        aria-hidden="true"
+      />
+      <span className="chat-typing-static" aria-hidden="true">
+        ...
+      </span>
     </span>
   );
 }
@@ -277,15 +290,6 @@ export function ChatModal() {
                   </div>
                 );
               })}
-
-              {/* In-flight Typing indicator when waiting for initial response */}
-              {isLoading && messages[messages.length - 1]?.role === "user" && (
-                <div className="flex items-start">
-                  <div className="rounded-xl px-4 py-3 bg-surface-2 border border-border/70 rounded-bl-xs">
-                    <TypingIndicator />
-                  </div>
-                </div>
-              )}
 
               {/* Error banner if general error occurred */}
               {error && !messages.some((m) => m.content === error) && (

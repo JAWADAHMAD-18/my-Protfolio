@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ChatProvider } from "@/components/chat/ChatProvider";
 import { LazyChatModal } from "@/components/chat/LazyChatModal";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -102,6 +103,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <ChatLauncher />
             <LazyChatModal />
             {process.env.VERCEL ? <Analytics /> : null}
           </ChatProvider>

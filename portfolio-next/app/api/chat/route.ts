@@ -14,6 +14,9 @@ const CHAT_MAX_REQUESTS = 15;
 const CHAT_WINDOW_MS = 10 * 60 * 1000;
 const GROQ_TEMPERATURE = 0.25;
 const GROQ_MAX_TOKENS = 400;
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const DEFAULT_GROQ_MODEL = "openai/gpt-oss-20b";
+const DEFAULT_GROQ_FALLBACK_MODEL = "openai/gpt-oss-120b";
 
 const UNAVAILABLE =
   "The assistant is temporarily unavailable. You can email Jawad at jawadahmad5618@gmail.com.";
@@ -53,7 +56,35 @@ function fallbackResponse() {
   return NextResponse.json({ message: FALLBACK_LINE, sources: [] });
 }
 
-function streamGroq(body: ReadableStream<Uint8Array>, sources: string[]) {
+function logGroqError(
+  status: number | "no HTTP response",
+  body: string,
+  apiKey: string
+) {
+  console.error("Groq request failed", {
+    status,
+    body: (body || "(empty)").replaceAll(apiKey, "[REDACTED]"),
+  });
+}
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "unknown error";
+}
+
+async function readGroqErrorBody(response: Response) {
+  try {
+    return await response.text();
+  } catch (error) {
+    return `Unable to read response body: ${errorMessage(error)}`;
+  }
+}
+
+function streamGroq(
+  body: ReadableStream<Uint8Array>,
+  sources: string[],
+  status: number,
+  apiKey: string
+) {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
@@ -61,6 +92,7 @@ function streamGroq(body: ReadableStream<Uint8Array>, sources: string[]) {
     async start(controller) {
       const reader = body.getReader();
       let buffer = "";
+      let upstreamErrorBody = "";
 
       const send = (chunk: string) => controller.enqueue(encoder.encode(chunk));
 
@@ -80,25 +112,37 @@ function streamGroq(body: ReadableStream<Uint8Array>, sources: string[]) {
             const data = trimmed.slice(5).trim();
             if (!data || data === "[DONE]") continue;
 
+            let json: {
+              error?: unknown;
+              choices?: Array<{ delta?: { content?: string } }>;
+            };
             try {
-              const json = JSON.parse(data) as {
-                choices?: Array<{ delta?: { content?: string } }>;
-              };
-              const token = json.choices?.[0]?.delta?.content;
-              if (token) {
-                send(`data: ${JSON.stringify({ token })}\n\n`);
-              }
+              json = JSON.parse(data);
             } catch {
               // Ignore a partial or non-JSON keepalive line.
+              continue;
+            }
+
+            if (json.error) {
+              upstreamErrorBody = data;
+              throw new Error(
+                typeof json.error === "string"
+                  ? json.error
+                  : JSON.stringify(json.error)
+              );
+            }
+
+            const token = json.choices?.[0]?.delta?.content;
+            if (token) {
+              send(`data: ${JSON.stringify({ token })}\n\n`);
             }
           }
         }
 
         send(`event: sources\ndata: ${JSON.stringify({ sources })}\n\n`);
         controller.close();
-      } catch {
-        // Status only. The visitor message is never logged.
-        console.error("Groq stream failed");
+      } catch (error) {
+        logGroqError(status, upstreamErrorBody || errorMessage(error), apiKey);
         send(
           `event: error\ndata: ${JSON.stringify({
             error: "The assistant hit a problem while replying. Please try again.",
@@ -169,40 +213,77 @@ export async function POST(req: NextRequest) {
     }
 
     const apiKey = process.env.GROQ_API_KEY;
-    const model = process.env.GROQ_MODEL;
-    if (!apiKey || !model) {
+    if (!apiKey) {
       console.error("Chat provider is not configured");
       return jsonError(UNAVAILABLE, 503);
     }
 
-    const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model,
-        temperature: GROQ_TEMPERATURE,
-        max_tokens: GROQ_MAX_TOKENS,
-        stream: true,
-        messages: [
-          { role: "system", content: buildSystemPrompt(formatContext(chunks)) },
-          ...history.map((turn) => ({ role: turn.role, content: turn.content })),
-          { role: "user", content: message },
-        ],
-      }),
-    });
+    const model = process.env.GROQ_MODEL || DEFAULT_GROQ_MODEL;
+    const fallbackModel =
+      process.env.GROQ_FALLBACK_MODEL || DEFAULT_GROQ_FALLBACK_MODEL;
+    const requestGroq = (requestModel: string) =>
+      fetch(GROQ_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: requestModel,
+          temperature: GROQ_TEMPERATURE,
+          max_tokens: GROQ_MAX_TOKENS,
+          stream: true,
+          messages: [
+            { role: "system", content: buildSystemPrompt(formatContext(chunks)) },
+            ...history.map((turn) => ({ role: turn.role, content: turn.content })),
+            { role: "user", content: message },
+          ],
+        }),
+      });
 
-    if (!groqResponse.ok || !groqResponse.body) {
-      console.error(`Groq request failed with status ${groqResponse.status}`);
+    let groqResponse: Response;
+    try {
+      groqResponse = await requestGroq(model);
+    } catch (error) {
+      logGroqError("no HTTP response", errorMessage(error), apiKey);
       return jsonError(
         "The assistant could not reply just now. Please try again in a moment.",
         502
       );
     }
 
-    return streamGroq(groqResponse.body, sources);
+    let groqErrorBody: string | null = null;
+    if (groqResponse.status === 400 || groqResponse.status === 404) {
+      groqErrorBody = await readGroqErrorBody(groqResponse);
+      logGroqError(groqResponse.status, groqErrorBody, apiKey);
+
+      if (fallbackModel !== model) {
+        try {
+          groqResponse = await requestGroq(fallbackModel);
+          groqErrorBody = null;
+        } catch (error) {
+          logGroqError("no HTTP response", errorMessage(error), apiKey);
+          return jsonError(
+            "The assistant could not reply just now. Please try again in a moment.",
+            502
+          );
+        }
+      }
+    }
+
+    if (!groqResponse.ok || !groqResponse.body) {
+      const body =
+        groqErrorBody ?? (await readGroqErrorBody(groqResponse));
+      if (groqErrorBody === null) {
+        logGroqError(groqResponse.status, body, apiKey);
+      }
+      return jsonError(
+        "The assistant could not reply just now. Please try again in a moment.",
+        502
+      );
+    }
+
+    return streamGroq(groqResponse.body, sources, groqResponse.status, apiKey);
   } catch (error) {
     const detail = error instanceof Error ? error.message : "unknown error";
     console.error(`Chat route failed: ${detail}`);

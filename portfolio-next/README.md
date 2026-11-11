@@ -26,7 +26,7 @@ The assistant answers only from the markdown files in `kb/`. It does not browse 
 2. Each remaining chunk is embedded with Gemini (`GEMINI_API_KEY`, `GEMINI_EMBED_MODEL`). The vectors are written to `kb/kb.embeddings.json`. Commit that file after a successful build.
 3. `POST /api/chat` checks the body (message up to 500 characters, at most 8 earlier turns), then rate-limits by IP: 15 messages per 10 minutes. Upstash is used when `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are set; otherwise the limit is kept in memory for that server process.
 4. The question is embedded, compared in memory with cosine similarity, and the top 4 chunks above a minimum score are placed in the system prompt. Source titles come back in the `X-Sources` header and in a final `sources` event.
-5. Groq streams the reply (`GROQ_API_KEY`, `GROQ_MODEL`) at temperature 0.25, capped at 400 tokens. If nothing in the index is relevant, the route returns a fixed fallback sentence and does not call Groq.
+5. Groq streams the reply (`GROQ_API_KEY`, `GROQ_MODEL`, `GROQ_FALLBACK_MODEL`) at temperature 0.25, capped at 400 tokens. The model defaults are `openai/gpt-oss-20b` and `openai/gpt-oss-120b`; a 400 or 404 from the primary model triggers one fallback attempt. If nothing in the index is relevant, the route returns a fixed fallback sentence and does not call Groq.
 
 Message text is not written to the server logs. Copy `.env.example` to `.env.local` and fill in the keys before building the index or calling the model.
 
