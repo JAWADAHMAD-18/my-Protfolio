@@ -3,6 +3,7 @@ import { Mail, MessageCircle, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { TechIcon } from "@/components/ui/TechIcon";
+import { ResumeLink } from "@/components/ui/ResumeLink";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -118,6 +119,10 @@ export default function ContactPage() {
                   <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-accent-text dark:group-hover:text-accent transition-colors" />
                 </a>
               ))}
+            </div>
+
+            <div className="pt-2">
+              <ResumeLink variant="outline" />
             </div>
 
             <div className="p-5 rounded-xl bg-surface-2/60 border border-border/80 text-xs text-muted leading-relaxed mt-6">

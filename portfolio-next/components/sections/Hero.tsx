@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { AskAiButton } from "@/components/chat/AskAiButton";
+import { ResumeLink } from "@/components/ui/ResumeLink";
 
 const HERO_PHOTO = "/media/profile/jawad-hero.webp";
 
@@ -51,7 +51,7 @@ export function Hero() {
               >
                 Let&apos;s talk
               </Link>
-
+              <ResumeLink variant="text" />
             </div>
           </div>
 

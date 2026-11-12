@@ -15,12 +15,9 @@ export interface SiteConfig {
     linkedin: string;
     zalvro: string;
   };
-  resume: {
-    url: string;
-    fallback: string;
-    exists: boolean;
-  };
 }
+
+export const RESUME_URL = "/resume.pdf";
 
 export const siteConfig: SiteConfig = {
   name: "Jawad Ahmad",
@@ -38,10 +35,5 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/JAWADAHMAD-18",
     linkedin: "https://www.linkedin.com/in/jawad-tech/",
     zalvro: "https://zalvrohq.com",
-  },
-  resume: {
-    url: "/resume.pdf",
-    fallback: "/contact",
-    exists: true,
   },
 };

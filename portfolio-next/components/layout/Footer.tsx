@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Mail, MessageCircle } from "lucide-react";
+import { ResumeLink } from "@/components/ui/ResumeLink";
 
 interface SocialLink {
   label: string;
@@ -94,6 +95,8 @@ export function Footer() {
               </Link>
             ))}
           </nav>
+
+          <ResumeLink variant="outline" />
 
           <div className="flex items-center gap-4">
             {SOCIAL_LINKS.map((item) => (

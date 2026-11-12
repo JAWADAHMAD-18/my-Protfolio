@@ -5,6 +5,7 @@ import { stackGroups } from "@/data/stack";
 import { certifications } from "@/data/certifications";
 import { siteConfig } from "@/data/site";
 import { TechIcon } from "@/components/ui/TechIcon";
+import { ResumeLink } from "@/components/ui/ResumeLink";
 
 export const metadata: Metadata = {
   title: "About",
@@ -52,6 +53,9 @@ export default function AboutPage() {
             <p className="text-muted text-base sm:text-lg leading-relaxed">
               I&apos;m Jawad, a full-stack and AI application engineer.
             </p>
+            <div className="mt-5">
+              <ResumeLink variant="outline" />
+            </div>
           </div>
 
           <div className="flex justify-center md:col-span-4 md:col-start-9 md:row-span-2 md:row-start-1 md:sticky md:top-24 md:justify-end self-start">
